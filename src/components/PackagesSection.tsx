@@ -158,39 +158,25 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
               </div>
 
               {/* Interactive Option Switcher (Option 1 vs Option 2) */}
-              <div className="mb-6 bg-white/10 p-1 rounded-xl flex items-center relative">
+              <div className="mb-6 bg-white/10 p-1 rounded-xl flex items-center gap-1">
                 <button
                   onClick={() => setPremiumOption('single')}
-                  className={`relative z-10 flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-colors ${
+                  className={`flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all ${
                     premiumOption === 'single'
-                      ? 'text-brand-navy'
+                      ? 'bg-white text-brand-navy shadow-sm'
                       : 'text-white/80 hover:text-white'
                   }`}
                 >
-                  {premiumOption === 'single' && (
-                    <motion.div
-                      layoutId="premiumTogglePill"
-                      className="absolute inset-0 bg-white rounded-lg shadow-sm -z-10"
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                    />
-                  )}
                   1 Subscriber (2 Months)
                 </button>
                 <button
                   onClick={() => setPremiumOption('dual')}
-                  className={`relative z-10 flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-colors ${
+                  className={`flex-1 py-2 px-2 rounded-lg text-xs font-bold transition-all ${
                     premiumOption === 'dual'
-                      ? 'text-brand-navy'
+                      ? 'bg-white text-brand-navy shadow-sm'
                       : 'text-white/80 hover:text-white'
                   }`}
                 >
-                  {premiumOption === 'dual' && (
-                    <motion.div
-                      layoutId="premiumTogglePill"
-                      className="absolute inset-0 bg-white rounded-lg shadow-sm -z-10"
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                    />
-                  )}
                   2 Subscribers (1 Month)
                 </button>
               </div>

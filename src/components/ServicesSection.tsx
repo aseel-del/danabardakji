@@ -171,19 +171,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                 <button
                   key={tab.id}
                   onClick={() => setActiveCategory(tab.id)}
-                  className={`relative px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-colors ${
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-200 ${
                     isActive
-                      ? 'text-white'
-                      : 'text-brand-navy/70 hover:text-brand-navy bg-white border border-brand-navy/10'
+                      ? 'bg-brand-navy text-white shadow-soft-sm'
+                      : 'bg-white text-brand-navy/75 hover:text-brand-navy hover:bg-white/90 border border-brand-navy/10'
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeServiceTab"
-                      className="absolute inset-0 bg-brand-navy rounded-xl shadow-soft-sm -z-10"
-                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                    />
-                  )}
                   {tab.label}
                 </button>
               );
