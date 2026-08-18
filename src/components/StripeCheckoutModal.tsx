@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CreditCard, ShieldCheck, CheckCircle2, ArrowRight, Loader2 } from 'lucide-react';
+import { X, CreditCard, ShieldCheck, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface StripeCheckoutModalProps {
   isOpen: boolean;
@@ -25,11 +25,25 @@ export const StripeCheckoutModal: React.FC<StripeCheckoutModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen, onClose]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate Stripe Checkout session dispatch
+    // Simulate Checkout session dispatch
     setTimeout(() => {
       setIsLoading(false);
       setIsSuccess(true);
@@ -54,195 +68,193 @@ export const StripeCheckoutModal: React.FC<StripeCheckoutModalProps> = ({
     return <span className="text-2xl sm:text-3xl font-black text-brand-gold flex-shrink-0">{priceStr}</span>;
   };
 
-  if (!isOpen) return null;
-
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Backdrop */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
           onClick={onClose}
-          className="fixed inset-0 bg-brand-navy/60 backdrop-blur-sm"
-        />
-
-        {/* Modal Window */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-brand-navy/10 overflow-hidden z-10 my-8"
         >
-          {/* Airy, Elegant Header */}
-          <div className="bg-brand-navy p-6 sm:p-7 text-white relative">
-            <button
-              onClick={onClose}
-              className="absolute top-5 right-5 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors"
-              aria-label="Close modal"
-            >
-              <X className="w-4 h-4" />
-            </button>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-brand-navy/65 backdrop-blur-sm pointer-events-none"
+          />
 
-            {/* Plan Title */}
-            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight pr-10 mb-4">
-              {planName || 'Consultation Booking'}
-            </h3>
+          {/* Modal Window */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-brand-navy/10 overflow-hidden z-10 my-auto max-h-[88vh] flex flex-col"
+          >
+            {/* Header (fixed at top of modal) */}
+            <div className="bg-brand-navy p-5 sm:p-7 text-white relative flex-shrink-0">
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
 
-            {/* Price & Details Bar */}
-            <div className="p-4 rounded-2xl bg-white/10 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              {renderFormattedPrice(planPrice)}
-              <div className="text-xs text-white/80 font-medium sm:text-right max-w-xs leading-relaxed">
-                {planDetails}
+              {/* Plan Title */}
+              <h3 className="text-lg sm:text-2xl font-extrabold text-white tracking-tight pr-10 mb-3 sm:mb-4">
+                {planName || 'Consultation Booking'}
+              </h3>
+
+              {/* Price & Details Bar */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/10 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
+                {renderFormattedPrice(planPrice)}
+                <div className="text-xs text-white/80 font-medium sm:text-right max-w-xs leading-relaxed">
+                  {planDetails}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Form Body */}
-          <div className="p-6 sm:p-8">
-            {isSuccess ? (
-              <div className="text-center py-6">
-                <div className="w-16 h-16 bg-brand-mint/25 text-brand-navy rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 className="w-9 h-9 text-brand-mint-dark" />
-                </div>
-                <h4 className="text-2xl font-bold text-brand-navy mb-2">Booking Registered</h4>
-                <p className="text-sm text-brand-navy/80 leading-relaxed mb-6">
-                  Thank you, <strong>{fullName}</strong>. Your consultation request for <strong>{planName}</strong> has been received. Dana will reach out directly via WhatsApp or Email within 24 hours to schedule your session.
-                </p>
+            {/* Form Body (scrollable on mobile) */}
+            <div className="p-5 sm:p-8 overflow-y-auto overscroll-contain flex-1">
+              {isSuccess ? (
+                <div className="text-center py-4 sm:py-6">
+                  <div className="w-16 h-16 bg-brand-mint/25 text-brand-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-9 h-9 text-brand-mint-dark" />
+                  </div>
+                  <h4 className="text-xl sm:text-2xl font-bold text-brand-navy mb-2">Booking Registered</h4>
+                  <p className="text-xs sm:text-sm text-brand-navy/80 leading-relaxed mb-6">
+                    Thank you, <strong>{fullName}</strong>. Your consultation request for <strong>{planName}</strong> has been received. Dana will reach out directly via WhatsApp or Email within 24 hours to schedule your session.
+                  </p>
 
-                <div className="bg-surface-subtle p-4 rounded-xl text-xs text-brand-navy/75 border border-surface-border text-left mb-6 space-y-1.5">
-                  <div><strong className="text-brand-navy">Email:</strong> {email}</div>
-                  <div><strong className="text-brand-navy">Phone:</strong> {phone}</div>
-                  <div><strong className="text-brand-navy">Selected Plan:</strong> {planName} ({planPrice})</div>
-                </div>
+                  <div className="bg-surface-subtle p-4 rounded-xl text-xs text-brand-navy/75 border border-surface-border text-left mb-6 space-y-1.5">
+                    <div><strong className="text-brand-navy">Email:</strong> {email}</div>
+                    <div><strong className="text-brand-navy">Phone:</strong> {phone}</div>
+                    <div><strong className="text-brand-navy">Selected Plan:</strong> {planName} ({planPrice})</div>
+                  </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a
-                    href={`https://wa.me/962792222058?text=Hello%20Dana,%20I%20have%20selected%20the%20${encodeURIComponent(planName)}%20(${encodeURIComponent(planPrice)}).%20My%20name%20is%20${encodeURIComponent(fullName)}.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-3.5 px-4 rounded-xl text-xs font-bold text-white bg-brand-navy hover:bg-brand-navy-light transition-colors flex items-center justify-center gap-2"
-                  >
-                    <span>Message on WhatsApp Now</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                   <button
                     onClick={handleReset}
-                    className="py-3.5 px-5 rounded-xl text-xs font-bold text-brand-navy bg-surface-subtle hover:bg-brand-mint/20 border border-brand-navy/15 transition-colors"
+                    className="w-full py-3.5 px-6 rounded-xl text-sm font-bold text-white bg-brand-navy hover:bg-brand-navy-light transition-colors"
                   >
-                    Close
+                    Done & Return
                   </button>
                 </div>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Sarah Al-Ahmad"
-                    className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/20 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20 outline-none text-sm text-brand-navy transition-all"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Full Name */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                      Email Address *
+                    <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                      Full Name *
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="name@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/20 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20 outline-none text-sm text-brand-navy transition-all"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="e.g. Sarah Al-Mansoor"
+                      className="w-full px-4 py-3 rounded-xl border border-brand-navy/15 focus:border-brand-mint focus:ring-2 focus:ring-brand-mint/20 text-sm text-brand-navy placeholder:text-brand-navy/35 outline-none transition-all"
                     />
                   </div>
 
+                  {/* Email & Phone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="sarah@example.com"
+                        className="w-full px-4 py-3 rounded-xl border border-brand-navy/15 focus:border-brand-mint focus:ring-2 focus:ring-brand-mint/20 text-sm text-brand-navy placeholder:text-brand-navy/35 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                        WhatsApp / Phone *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+962 7 9222 2058"
+                        className="w-full px-4 py-3 rounded-xl border border-brand-navy/15 focus:border-brand-mint focus:ring-2 focus:ring-brand-mint/20 text-sm text-brand-navy placeholder:text-brand-navy/35 outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Primary Goal / Condition */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                      Phone / WhatsApp *
+                    <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                      Primary Clinical / Dietary Goal
                     </label>
-                    <input
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+971 50 ... or +962 7 ..."
-                      className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/20 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20 outline-none text-sm text-brand-navy transition-all"
+                    <select
+                      value={healthGoal}
+                      onChange={(e) => setHealthGoal(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-brand-navy/15 focus:border-brand-mint focus:ring-2 focus:ring-brand-mint/20 text-sm text-brand-navy bg-white outline-none transition-all cursor-pointer"
+                    >
+                      <option value="Weight Management">Weight Management (Loss / Healthy Gain)</option>
+                      <option value="Muscle Gain & Body Composition">Muscle Gain & Body Composition</option>
+                      <option value="Pregnancy & Lactation Nutrition">Pregnancy & Lactation Nutrition</option>
+                      <option value="Keto Diet Planning">Keto Diet Planning & Monitoring</option>
+                      <option value="Post Bariatric Surgery Diet">Post Bariatric Surgery Diet</option>
+                      <option value="Therapeutic Care">Therapeutic Care (Diabetes, Blood Pressure, Cholesterol)</option>
+                      <option value="Food Allergies & Intolerances">Food Allergies & Digestive Health</option>
+                      <option value="Child & Family Nutrition">Child Malnutrition & Family Nutrition</option>
+                      <option value="Well Being & Mindful Eating">Well Being & Self Reflection</option>
+                    </select>
+                  </div>
+
+                  {/* Notes */}
+                  <div>
+                    <label className="block text-xs font-bold text-brand-navy uppercase tracking-wider mb-1.5">
+                      Health Background or Notes <span className="font-normal text-brand-navy/50">(Optional)</span>
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="Any medical history, dietary restrictions, allergies, or preferred appointment times..."
+                      className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/15 focus:border-brand-mint focus:ring-2 focus:ring-brand-mint/20 text-sm text-brand-navy placeholder:text-brand-navy/35 outline-none transition-all resize-none"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                    Primary Health Focus
-                  </label>
-                  <select
-                    value={healthGoal}
-                    onChange={(e) => setHealthGoal(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/20 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20 outline-none text-sm text-brand-navy bg-white transition-all"
-                  >
-                    <option value="Weight Management">Weight Management (Fat Loss / Healthy Gain)</option>
-                    <option value="Muscle Gain">Muscle Gain & Athletic Nutrition</option>
-                    <option value="Pregnant & Lactating">Pregnant & Lactating Nutrition</option>
-                    <option value="Keto Diet">Keto Plan</option>
-                    <option value="Post Bariatric">Post Bariatric Surgery Plan</option>
-                    <option value="Therapeutic / Medical">Therapeutic (Diabetes, Hypertension, Cholesterol, Allergies)</option>
-                    <option value="Well Being & Reflection">Well Being & Mindful Eating</option>
-                  </select>
-                </div>
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full py-3.5 px-6 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Connecting to Secure Gateway...</span>
+                        </>
+                      ) : (
+                        <>
+                          <CreditCard className="w-4 h-4" />
+                          <span>Proceed to Checkout ({planPrice})</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                    Notes or Specific Inquiries (Optional)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Mention any allergies, medical conditions, or appointment preferences..."
-                    className="w-full px-4 py-2.5 rounded-xl border border-brand-navy/20 focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/20 outline-none text-sm text-brand-navy transition-all resize-none"
-                  />
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full py-3.5 px-6 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 flex items-center justify-center gap-2"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Connecting to Secure Gateway...</span>
-                      </>
-                    ) : (
-                      <>
-                        <CreditCard className="w-4 h-4" />
-                        <span>Proceed to Checkout ({planPrice})</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-brand-navy/60">
-                  <ShieldCheck className="w-3.5 h-3.5 text-brand-mint-dark" />
-                  <span>256-Bit SSL Encrypted • Powered by Stripe</span>
-                </div>
-              </form>
-            )}
-          </div>
-        </motion.div>
-      </div>
+                  <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-brand-navy/60">
+                    <ShieldCheck className="w-3.5 h-3.5 text-brand-mint-dark" />
+                    <span>256-Bit SSL Encrypted • Powered by Stripe</span>
+                  </div>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
     </AnimatePresence>
   );
 };

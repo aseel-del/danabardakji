@@ -93,32 +93,41 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenConsultation }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-nav border-b border-brand-navy/10 px-4 pt-3 pb-6 animate-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 text-base font-medium text-brand-navy hover:bg-brand-mint/20 rounded-lg transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-3 border-t border-brand-navy/10 flex flex-col gap-2.5">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenConsultation();
-                }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white bg-brand-coral hover:bg-brand-coral-dark rounded-xl shadow-soft"
-              >
-                <span>Book $50 Consultation</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 top-[60px] bg-brand-navy/30 backdrop-blur-xs z-40 md:hidden"
+            aria-hidden="true"
+          />
+
+          <div className="relative z-50 md:hidden glass-nav border-b border-brand-navy/10 px-4 pt-3 pb-6 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2.5 text-base font-medium text-brand-navy hover:bg-brand-mint/20 rounded-lg transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="pt-3 border-t border-brand-navy/10 flex flex-col gap-2.5">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenConsultation();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white bg-brand-coral hover:bg-brand-coral-dark rounded-xl shadow-soft"
+                >
+                  <span>Book $50 Consultation</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
