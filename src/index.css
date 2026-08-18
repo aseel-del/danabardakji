@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #103855;
+    background-color: #fbfdfd;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #97d3cb;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6bb5ab;
+  }
+}
+
+/* Glassmorphism effects */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(16, 56, 85, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Sophisticated gradient borders and subtle textures */
+.border-gradient-subtle {
+  border-image: linear-gradient(to bottom right, #97d3cb, #fecf8d) 1;
+}
+
+/* Subtle organic mesh background */
+.bg-mesh-subtle {
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(151, 211, 203, 0.18) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(254, 207, 141, 0.18) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(241, 121, 99, 0.12) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, rgba(16, 56, 85, 0.06) 0px, transparent 50%);
+}
