@@ -31,17 +31,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="text-center max-w-4xl mx-auto">
           
-          {/* Main Display Headline with 100% Static Anchor and Uncropped Smooth Crossfade */}
+          {/* Main Display Headline with Mobile Responsive Line Breakdown */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-[1.25] mb-10 sm:mb-12"
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-[1.25] mb-10 sm:mb-12"
           >
             <span className="block mb-2 sm:mb-3">Personalized Clinical Nutrition</span>
-            <span className="inline-flex items-baseline justify-center gap-2.5 sm:gap-3.5">
-              <span className="text-brand-navy flex-shrink-0">Designed for</span>
-              <span className="relative inline-grid grid-cols-1 grid-rows-1 text-brand-coral align-baseline text-left">
+            <span className="flex flex-col sm:inline-flex sm:flex-row items-center sm:items-baseline justify-center gap-1.5 sm:gap-3.5">
+              <span className="text-brand-navy">Designed for</span>
+              <span className="relative inline-grid grid-cols-1 grid-rows-1 text-brand-coral align-baseline text-center sm:text-left">
                 {HIGHLIGHT_WORDS.map((word, i) => (
                   <motion.span
                     key={word}
