@@ -17,6 +17,7 @@ export const PACKAGES_DATA: PackagePlan[] = [
     dietPlansCount: 4,
     headerColor: '#8F2D3E',
     accentColor: '#8F2D3E',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/standard-package',
     tagline: 'مشترك واحد • متابعة عبر زوم (1) • 4 خطط غذائية • مدة الاشتراك: 4 اسابيع',
     description: 'خطة سريرية مخصصة تشمل مشترك واحد، متابعة مباشرة عبر زوم (جلسة واحدة)، 4 خطط غذائية أسبوعية مخصصة، ومدة اشتراك 4 أسابيع مع متابعة دقيقة على مدار الأسبوع.',
     features: [
@@ -43,6 +44,7 @@ export const PACKAGES_DATA: PackagePlan[] = [
     headerColor: '#3C7D68',
     accentColor: '#3C7D68',
     popular: true,
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/premium-package',
     tagline: 'مشترك واحد • متابعة عبر زوم (2) • 9 خطط غذائية • مدة الاشتراك: 9 اسابيع',
     description: 'الباقة الأكثر طلباً للتحول الصحي المستدام وتثبيت الوزن، تشمل مشترك واحد، جلستان متابعة عبر زوم، 9 خطط غذائية متجددة، ومدة اشتراك 9 أسابيع كاملة.',
     features: [
@@ -68,6 +70,7 @@ export const PACKAGES_DATA: PackagePlan[] = [
     dietPlansCount: 12,
     headerColor: '#D5A021',
     accentColor: '#D5A021',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/extended-package',
     tagline: 'مشترك واحد • متابعة عبر زوم (3) • 12 خطط غذائية • مدة الاشتراك: 12 اسابيع',
     description: 'برنامج التحول الشامل للحالات السريرية وتغيير نمط الحياة بالكامل، يشمل 3 جلسات متابعة زوم، 12 خطة غذائية، ومدة اشتراك 12 أسبوعاً بإشراف مباشر ومكثف.',
     features: [
@@ -114,6 +117,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Detox & Reset',
     duration: '3 to 7 Days Protocol',
     downloadFormat: 'Instant PDF Guide (Arabic & English Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/liquid-diet-protocol',
     description: 'A clinically designed, nutrient-dense liquid fasting protocol formulated to alleviate digestive distress, reduce systemic inflammation, and reset metabolic appetite.',
     longDescription: 'The Liquid Diet Protocol is an evidence-based clinical regimen engineered for rapid digestive relief and metabolic recalibration. Unlike commercial juice cleanses that spike insulin with excessive fructose, this protocol balances bioactive botanical broths, cold-pressed green elixirs, functional protein emulsions, and electrolyte-dense hydration to protect lean muscle mass while giving the gastrointestinal tract complete digestive rest.',
     suitableFor: [
@@ -153,6 +157,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Gut Health',
     duration: '21 Days Protocol',
     downloadFormat: 'Instant PDF Guide (Arabic & English Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/gut-reset-protocol',
     description: 'A therapeutic 3-phase elimination and re-inoculation protocol designed to heal intestinal permeability, balance the microbiome, and resolve chronic bloating.',
     longDescription: 'Chronic digestive issues, IBS symptoms, sluggish bowel motility, and food sensitivities often stem from an imbalanced gut flora and compromised intestinal barrier. The Gut Reset Protocol applies the functional 3R methodology (Remove, Repair, Restore) using anti-inflammatory whole foods, polyphenol-dense prebiotics, and mucosal-supporting nutrients to rebuild gut resilience from the foundation up.',
     suitableFor: [
@@ -191,6 +196,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Hormonal Health',
     duration: '4 to 8 Weeks Protocol',
     downloadFormat: 'Instant PDF Guide (Arabic & English Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/fertility-diet-protocol',
     description: 'Specialized clinical nutrition formulated by Dana Bardakji based on her specialized tenure in Women & Obstetrics medical centers to balance estrogen, progesterone, and insulin sensitivity.',
     longDescription: 'Developed from years of clinical practice in Abu Dhabi’s leading Women and Obstetrics medical centers, this protocol directly addresses insulin resistance, estrogen dominance, androgen excess, and micronutrient deficiencies that impair ovulation and fertility. It optimizes egg quality, stabilizes follicular development, and regulates menstrual cycles through targeted anti-inflammatory nutrition.',
     suitableFor: [
@@ -229,6 +235,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Metabolic & Fitness',
     duration: '4 Weeks Protocol',
     downloadFormat: 'Instant PDF Guide (Arabic & English Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/carb-cycling-protocol',
     description: 'A dynamic nutrition system alternating high, moderate, and low-carbohydrate days to shatter weight loss plateaus, maximize glycogen efficiency, and incinerate body fat.',
     longDescription: 'Continuous calorie restriction inevitably slows down the basal metabolic rate and suppresses thyroid output. The Carb Cycling Protocol keeps your metabolic furnace burning by strategically cycling carbohydrate intake in sync with your weekly training intensity and rest days. High-carb days replenish glycogen and boost leptin, while low-carb days maximize fat oxidation.',
     suitableFor: [
@@ -267,6 +274,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Seasonal Special',
     duration: '30 Days Full Month Plan',
     downloadFormat: 'Instant PDF Guide (Arabic & English Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/ramadan-fasting-program',
     description: 'A complete Ramadan nutritional blueprint engineered to keep you energized, hydrated, and metabolically balanced from Suhoor to Iftar throughout the fasting month.',
     longDescription: 'Ramadan is a sacred month of fasting, yet many experience unexpected weight gain, lethargy, acid reflux, and dehydration due to high-sugar sweets and heavy fried foods. Dana Bardakji’s Ramadan Fasting Programme provides a clinically balanced dietary schedule that satisfies cultural traditions while ensuring sustained energy, optimal cellular hydration, and healthy weight maintenance.',
     suitableFor: [
@@ -305,6 +313,7 @@ export const PROGRAMS_DATA: ProgramItem[] = [
     badge: 'Essential Tool',
     duration: 'Lifetime Reference Guide',
     downloadFormat: 'Instant PDF Handbook (Arabic, English & Bilingual Versions Included)',
+    gumroadUrl: 'https://danabardakji.gumroad.com/l/food-exchange-handbook',
     description: 'The definitive clinical food exchange manual that empowers you to swap carbohydrates, proteins, fats, and dairy effortlessly without counting tedious calories.',
     longDescription: 'Strict, rigid diets fail because life is dynamic. The Food Exchange System is the gold-standard clinical tool used by dietitians worldwide to give patients total dietary autonomy. This handbook categorizes foods into standardized nutritional exchange groups (Starches, Lean/Medium/High Fats Proteins, Vegetables, Fruits, Dairy, Free Foods), enabling you to create unlimited balanced meals at home, in restaurants, or while traveling.',
     suitableFor: [

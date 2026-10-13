@@ -153,26 +153,14 @@ export const PackagesIndexPage: React.FC = () => {
 
                 {/* Actions */}
                 <div className="p-6 sm:p-8 pt-0 space-y-3">
-                  <button
-                    onClick={() =>
-                      addToCart({
-                        id: pkg.id,
-                        title: `${pkg.arabicName} (${pkg.englishName})`,
-                        subtitle: `${pkg.duration} • اشتراك كامل`,
-                        price: `${pkg.priceAed} درهم إماراتي`,
-                        priceNumber: pkg.priceAed || 550,
-                        currency: 'AED',
-                        type: 'package',
-                        slug: `/packages/${pkg.slug}`,
-                        badge: isPopular ? 'Popular' : undefined,
-                      })
-                    }
-                    className="w-full py-3.5 px-6 rounded-2xl text-xs font-bold uppercase tracking-wider text-white shadow-soft transition-all flex items-center justify-center gap-2"
+                  <a
+                    href={pkg.gumroadUrl || `#`}
+                    className="gumroad-button w-full py-3.5 px-6 rounded-2xl text-xs font-bold uppercase tracking-wider text-white shadow-soft transition-all flex items-center justify-center gap-2 cursor-pointer"
                     style={{ backgroundColor: pkg.headerColor || '#3C7D68' }}
                   >
                     <ShoppingBag className="w-4 h-4" />
-                    <span>اختر الباقة ({pkg.priceAed} درهم)</span>
-                  </button>
+                    <span>الاشتراك عبر Gumroad ({pkg.priceAed} درهم)</span>
+                  </a>
 
                   <Link
                     to={`/packages/${pkg.slug}`}

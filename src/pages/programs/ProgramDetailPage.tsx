@@ -256,13 +256,22 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 )}
               </div>
 
-              <button
-                onClick={handleAddToCart}
-                className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span>إضافة إلى السلة ({currentPriceAed} درهم)</span>
-              </button>
+              <div className="space-y-2">
+                <a
+                  href={program.gumroadUrl || '#'}
+                  className="gumroad-button w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>الشراء والتحميل الفوري عبر Gumroad ({currentPriceAed} درهم)</span>
+                </a>
+
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-brand-navy bg-surface-subtle hover:bg-brand-mint/20 border border-brand-navy/10 transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>إضافة إلى سلة الموقع ({currentPriceAed} درهم)</span>
+                </button>
+              </div>
 
               {/* Add Consultation Bundle Option */}
               <div className="pt-4 border-t border-brand-navy/10">

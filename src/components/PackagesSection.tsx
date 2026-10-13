@@ -129,20 +129,14 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
 
                 {/* Footer Action Buttons */}
                 <div className="p-6 sm:p-8 pt-0 space-y-3">
-                  <button
-                    onClick={() =>
-                      onSelectPlan?.(
-                        `${pkg.arabicName} (${pkg.englishName})`,
-                        `${pkg.priceAed} درهم إماراتي`,
-                        pkg.features.join(' • ')
-                      )
-                    }
-                    className="w-full py-3.5 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white shadow-soft transition-all duration-200 flex items-center justify-center gap-2 group"
+                  <a
+                    href={pkg.gumroadUrl || `#`}
+                    className="gumroad-button w-full py-3.5 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white shadow-soft transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
                     style={{ backgroundColor: pkg.headerColor || '#3C7D68' }}
                   >
-                    <span>اختر الباقة / Select Package</span>
+                    <span>اختر الباقة / Select Package ({pkg.priceAed} درهم)</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </a>
 
                   <Link
                     to={`/packages/${pkg.slug}`}

@@ -74,6 +74,7 @@ export interface ProgramItem {
   whatsIncluded: string[];
   duration: string;
   downloadFormat: string;
+  gumroadUrl?: string;
   gumroadUrlWithoutFollowUp?: string;
   gumroadUrlWithFollowUp?: string;
   sampleMealSchedule?: {
