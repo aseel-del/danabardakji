@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 interface PackagesSectionProps {
-  onSelectPlan: (planName: string, price: string, details: string) => void;
+  onSelectPlan?: (planName: string, price: string, details: string) => void;
 }
 
 export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }) => {
@@ -118,7 +118,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
             </div>
 
             <button
-              onClick={() => onSelectPlan('STANDARD Package', '550 DHS', '1 Subscriber • 4 Weeks • 4 Diet Plans • 1 Zoom Follow Up')}
+              onClick={() => onSelectPlan?.('STANDARD Package', '550 DHS', '1 Subscriber • 4 Weeks • 4 Diet Plans • 1 Zoom Follow Up')}
               className="w-full py-3.5 px-6 rounded-xl text-sm font-bold uppercase tracking-wider text-brand-navy bg-surface-subtle hover:bg-brand-mint/25 border border-brand-navy/15 hover:border-brand-mint transition-all duration-200 flex items-center justify-center gap-2 group"
             >
               <span>Choose Standard</span>
@@ -262,7 +262,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
             </div>
 
             <button
-              onClick={() => onSelectPlan(
+              onClick={() => onSelectPlan?.(
                 `PREMIUM Package (${premiumOption === 'single' ? '1 Sub / 2 Months' : '2 Subs / 1 Month'})`, 
                 '1000 DHS', 
                 premiumOption === 'single' 
@@ -342,7 +342,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
             </div>
 
             <button
-              onClick={() => onSelectPlan('EXTENDED Package', '1400 DHS', '1 Subscriber • 3 Months (12 Weeks) • 12 Diet Plans • 3 Zoom Follow Ups')}
+              onClick={() => onSelectPlan?.('EXTENDED Package', '1400 DHS', '1 Subscriber • 3 Months (12 Weeks) • 12 Diet Plans • 3 Zoom Follow Ups')}
               className="w-full py-3.5 px-6 rounded-xl text-sm font-bold uppercase tracking-wider text-brand-navy bg-surface-subtle hover:bg-brand-mint/25 border border-brand-navy/15 hover:border-brand-mint transition-all duration-200 flex items-center justify-center gap-2 group"
             >
               <span>Choose Extended</span>
@@ -380,7 +380,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPlan }
             </div>
 
             <button
-              onClick={() => onSelectPlan('One-on-One Consultation', '$50 USD', 'Direct Clinical Evaluation Session (*Does not include diet plan)')}
+              onClick={() => onSelectPlan?.('One-on-One Consultation', '$50 USD', 'Direct Clinical Evaluation Session (*Does not include diet plan)')}
               className="py-3.5 px-6 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 flex items-center gap-2 group whitespace-nowrap"
             >
               <CreditCard className="w-4 h-4" />

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Award, BookOpen, Stethoscope, Building2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface HeroProps {
-  onOpenConsultation: () => void;
+  onOpenConsultation?: () => void;
 }
 
 const HIGHLIGHT_WORDS = [
@@ -80,20 +81,29 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-24 sm:mb-28"
           >
-            <a
-              href="#packages"
+            <Link
+              to="/packages"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-semibold text-white bg-brand-coral hover:bg-brand-coral-dark rounded-xl shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:-translate-y-0.5"
             >
               <span>Explore Diet Packages</span>
               <ArrowRight className="w-5 h-5" />
-            </a>
+            </Link>
 
-            <button
-              onClick={onOpenConsultation}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-semibold text-brand-navy bg-white hover:bg-brand-gold/15 border border-brand-navy/20 hover:border-brand-navy/40 rounded-xl shadow-soft-sm transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <span>Book 1-on-1 Consultation ($50)</span>
-            </button>
+            {onOpenConsultation ? (
+              <button
+                onClick={onOpenConsultation}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-semibold text-brand-navy bg-white hover:bg-brand-gold/15 border border-brand-navy/20 hover:border-brand-navy/40 rounded-xl shadow-soft-sm transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <span>Book 1-on-1 Consultation ($50)</span>
+              </button>
+            ) : (
+              <Link
+                to="/packages/consultation"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-semibold text-brand-navy bg-white hover:bg-brand-gold/15 border border-brand-navy/20 hover:border-brand-navy/40 rounded-xl shadow-soft-sm transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <span>Book 1-on-1 Consultation ($50)</span>
+              </Link>
+            )}
           </motion.div>
 
           {/* Key Clinical Credentials & Trust Points */}

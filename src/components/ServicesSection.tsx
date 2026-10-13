@@ -218,7 +218,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-navy/60 block mb-2">
                       Key Highlights:
                     </span>
-                    {service.focusAreas.map((area, i) => (
+                    {service.focusAreas.map((area: string, i: number) => (
                       <div key={i} className="flex items-center gap-2 text-xs text-brand-navy/85 font-medium">
                         <CheckCircle2 className="w-3.5 h-3.5 text-brand-mint-dark flex-shrink-0" />
                         <span>{area}</span>
