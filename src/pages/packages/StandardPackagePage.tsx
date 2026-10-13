@@ -108,11 +108,11 @@ export const StandardPackagePage: React.FC = () => {
               
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-brand-navy/60 block mb-1">
-                  1 Month Full Access • 1 Subscriber
+                  مدة الاشتراك: 4 أسابيع • مشترك واحد
                 </span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl sm:text-5xl font-black text-brand-navy">{pkg.priceDhs}</span>
-                  <span className="text-lg font-bold text-brand-navy/70">DHS</span>
+                  <span className="text-4xl sm:text-5xl font-black text-brand-navy">{pkg.priceAed}</span>
+                  <span className="text-lg font-bold text-brand-navy/70">درهم إماراتي</span>
                   <span className="text-xs font-semibold text-brand-navy/50"> (~${pkg.priceUsd} USD)</span>
                 </div>
               </div>
@@ -120,15 +120,15 @@ export const StandardPackagePage: React.FC = () => {
               <div className="p-4 rounded-2xl bg-surface-subtle border border-surface-border text-xs text-brand-navy/75 space-y-2">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-brand-mint-dark" />
-                  <span>Start Date: Within 24-48h of intake submission</span>
+                  <span>مدة الاشتراك: 4 أسابيع</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MessageCircle className="w-4 h-4 text-brand-mint-dark" />
-                  <span>Direct WhatsApp Channel with Dana</span>
+                  <span>متابعة عبر زوم (جلسة واحدة) ومتابعة مباشرة عبر الواتساب</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-brand-mint-dark" />
-                  <span>100% Bespoke Clinical Plan</span>
+                  <span>4 خطط غذائية مخصصة سريرياً</span>
                 </div>
               </div>
 
@@ -136,19 +136,20 @@ export const StandardPackagePage: React.FC = () => {
                 onClick={() =>
                   addToCart({
                     id: pkg.id,
-                    title: pkg.name,
-                    subtitle: `${pkg.duration} • 1 Subscriber`,
-                    price: `${pkg.priceDhs} DHS`,
-                    priceNumber: pkg.priceDhs,
-                    currency: 'DHS',
+                    title: `${pkg.arabicName} (${pkg.englishName})`,
+                    subtitle: `${pkg.duration} • مشترك واحد`,
+                    price: `${pkg.priceAed} درهم إماراتي`,
+                    priceNumber: pkg.priceAed || 550,
+                    currency: 'AED',
                     type: 'package',
                     slug: `/packages/${pkg.slug}`,
                   })
                 }
                 className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2"
+                style={{ backgroundColor: pkg.headerColor || undefined }}
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add to Cart ({pkg.priceDhs} DHS)</span>
+                <span>اختر الباقة ({pkg.priceAed} درهم إماراتي)</span>
               </button>
 
               <div className="text-center pt-2">

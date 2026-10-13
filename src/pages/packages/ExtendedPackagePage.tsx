@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, ShoppingBag, ArrowLeft, ShieldCheck, MessageCircle, Calendar, Sparkles, Gift } from 'lucide-react';
+import { ShoppingBag, ArrowLeft, ShieldCheck, MessageCircle, Calendar, Sparkles, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { PACKAGES_DATA } from '../../data/siteData';
@@ -19,7 +19,7 @@ export const ExtendedPackagePage: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to All Packages</span>
+          <span>الرجوع إلى جميع الباقات / Back to All Packages</span>
         </Link>
 
         {/* Main Grid */}
@@ -29,79 +29,78 @@ export const ExtendedPackagePage: React.FC = () => {
           <div className="lg:col-span-7 space-y-8">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-mint/30 text-brand-navy">
-                  12 Weeks • 3 Full Months
+                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white" style={{ backgroundColor: pkg.headerColor || '#D5A021' }}>
+                  {pkg.duration} • مدة الاشتراك: 12 أسبوع
                 </span>
-                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-coral/15 text-brand-coral flex items-center gap-1">
-                  <Gift className="w-3.5 h-3.5" />
-                  <span>2 Free Bonus Sessions</span>
+                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-gold/30 text-brand-navy flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-brand-gold-dark" />
+                  <span>التحول الشامل • Comprehensive Reset</span>
                 </span>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-4">
-                {pkg.name}
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-2">
+                {pkg.arabicName} ({pkg.englishName})
               </h1>
               <p className="text-base text-brand-navy/80 leading-relaxed font-normal">
                 {pkg.description}
               </p>
             </div>
 
-            {/* What is Included */}
+            {/* What is Included (Exact match to reference sheet) */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-4">
               <h3 className="text-lg font-bold text-brand-navy flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-brand-gold" />
-                <span>What's Included in Your 12-Week Journey</span>
+                <span>المميزات المشمولة في الباقة الموسعة</span>
               </h3>
-              <div className="space-y-3 pt-2">
+              <div className="space-y-3 pt-2" dir="rtl">
                 {pkg.features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-brand-navy/85">
-                    <Check className="w-4 h-4 text-brand-mint-dark flex-shrink-0 mt-0.5" />
+                  <div key={i} className="flex items-center gap-3 text-base text-brand-navy font-bold">
+                    <span className="text-base select-none flex-shrink-0" aria-hidden="true">🚩</span>
                     <span>{feat}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Special Clinical Focus */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-3">
-              <h3 className="text-base font-bold text-brand-navy">Recommended For:</h3>
-              <p className="text-xs text-brand-navy/75 leading-relaxed font-normal">
-                Clients needing ongoing medical nutritional therapy for chronic conditions (Type-2 diabetes reversal, hypertension, severe hormonal dysregulation/PCOS, post-bariatric surgery care, morbid obesity, or severe food allergies).
-              </p>
+            {/* Timeline details */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-4">
+              <h3 className="text-lg font-bold text-brand-navy">تفاصيل الرحلة والمتابعة (12 أسبوع)</h3>
+              <div className="space-y-4 pt-2 text-xs sm:text-sm text-brand-navy/80">
+                <p>• <strong>مشترك واحد:</strong> خطة علاجية مخصصة بالكامل للحالات التي تتطلب دعماً طبياً مستمراً وتثبيتاً حقيقياً للنتائج.</p>
+                <p>• <strong>متابعة عبر زوم (3):</strong> ثلاث جلسات استشارية معمقة لمتابعة الفحوصات والتحاليل والمؤشرات الحيوية.</p>
+                <p>• <strong>12 خطة غذائية:</strong> خطة متجددة لكل أسبوع (12 خطة كاملة) لضمان التنوع التام والوصول إلى الهدف المنشود.</p>
+                <p>• <strong>مدة الاشتراك:</strong> 12 أسبوعاً (3 أشهر) لإعادة بناء العادات الصحية والتوازن الأيضي.</p>
+              </div>
             </div>
           </div>
 
           {/* Pricing & Booking Card Column */}
           <div className="lg:col-span-5 sticky top-28">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-brand-mint/40 shadow-soft-xl space-y-6">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-brand-mint/50 shadow-soft-xl space-y-6">
               
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-brand-navy/60 block mb-1">
-                  3 Months Transformation • 1 Subscriber
+                  مدة الاشتراك: 12 أسبوع • مشترك واحد
                 </span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl sm:text-5xl font-black text-brand-navy">{pkg.priceDhs}</span>
-                  <span className="text-lg font-bold text-brand-navy/70">DHS</span>
+                  <span className="text-4xl sm:text-5xl font-black text-brand-navy">{pkg.priceAed}</span>
+                  <span className="text-lg font-bold text-brand-navy/70">درهم إماراتي</span>
                   <span className="text-xs font-semibold text-brand-navy/50"> (~${pkg.priceUsd} USD)</span>
                 </div>
               </div>
 
               <div className="p-4 rounded-2xl bg-surface-subtle border border-surface-border text-xs text-brand-navy/75 space-y-2">
                 <div className="flex items-center gap-2">
-                  <Gift className="w-4 h-4 text-brand-coral" />
-                  <span className="text-brand-navy font-bold">Includes 2 Free Bonus Sessions</span>
-                </div>
-                <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-brand-mint-dark" />
-                  <span>Start Date: Within 24-48h of intake submission</span>
+                  <span>مدة الاشتراك: 12 أسبوعاً كاملاً</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4 text-brand-mint-dark" />
-                  <span>Priority WhatsApp Follow-up with Dana</span>
+                  <Video className="w-4 h-4 text-brand-mint-dark" />
+                  <span>متابعة عبر زوم (3 جلسات) + متابعة واتساب مستمرة</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-brand-mint-dark" />
-                  <span>Full Lab Biomarker Monitoring</span>
+                  <span>12 خطة غذائية مخصصة سريرياً</span>
                 </div>
               </div>
 
@@ -109,19 +108,20 @@ export const ExtendedPackagePage: React.FC = () => {
                 onClick={() =>
                   addToCart({
                     id: pkg.id,
-                    title: pkg.name,
-                    subtitle: `${pkg.duration} • 2 Bonus Sessions Included`,
-                    price: `${pkg.priceDhs} DHS`,
-                    priceNumber: pkg.priceDhs,
-                    currency: 'DHS',
+                    title: `${pkg.arabicName} (${pkg.englishName})`,
+                    subtitle: `${pkg.duration} • مشترك واحد`,
+                    price: `${pkg.priceAed} درهم إماراتي`,
+                    priceNumber: pkg.priceAed || 1400,
+                    currency: 'AED',
                     type: 'package',
                     slug: `/packages/${pkg.slug}`,
                   })
                 }
-                className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white shadow-soft hover:shadow-soft-lg transition-all flex items-center justify-center gap-2"
+                style={{ backgroundColor: pkg.headerColor || '#D5A021' }}
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add to Cart ({pkg.priceDhs} DHS)</span>
+                <span>اختر الباقة ({pkg.priceAed} درهم إماراتي)</span>
               </button>
 
               <div className="text-center pt-2">
@@ -131,7 +131,7 @@ export const ExtendedPackagePage: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-xs font-bold text-brand-navy hover:text-brand-coral transition-colors"
                 >
-                  Have questions? Chat with Dana on WhatsApp →
+                  هل لديك استفسار؟ تواصلي مباشرة عبر الواتساب →
                 </a>
               </div>
             </div>

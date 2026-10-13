@@ -76,28 +76,42 @@ export const ProgrammesSection: React.FC = () => {
                   <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-brand-gold/25 text-brand-navy border border-brand-gold/30">
                     {prog.badge}
                   </span>
-                  <div className="flex items-baseline gap-1 text-brand-navy font-black text-xl">
-                    <span>${prog.priceUsd}</span>
-                    <span className="text-xs font-semibold text-brand-navy/60">USD</span>
+                  <div className="text-right">
+                    <div className="flex items-baseline gap-1 text-brand-navy font-black text-lg">
+                      <span>من {prog.priceWithoutFollowUpAed || 350}</span>
+                      <span className="text-xs font-bold text-brand-navy/70">درهم</span>
+                    </div>
+                    <span className="text-[10px] text-brand-navy/60 block">AED (بدون / مع متابعة)</span>
                   </div>
                 </div>
 
                 {/* Title & Subtitle */}
                 <Link to={`/programs/${prog.slug}`} className="block group-hover:text-brand-coral transition-colors">
-                  <h3 className="text-xl font-extrabold text-brand-navy mb-1.5 leading-snug">
-                    {prog.title}
+                  <h3 className="text-xl font-extrabold text-brand-navy mb-1 leading-snug">
+                    {prog.arabicTitle || prog.title}
                   </h3>
+                  <div className="text-xs font-semibold text-brand-coral mb-2">
+                    {prog.title}
+                  </div>
                 </Link>
-                <p className="text-xs text-brand-navy/65 font-medium mb-4">
-                  {prog.subtitle}
+                <p className="text-xs text-brand-navy/65 font-medium mb-3">
+                  {prog.arabicSubtitle || prog.subtitle}
                 </p>
 
-                <p className="text-xs text-brand-navy/80 leading-relaxed mb-5 line-clamp-3">
-                  {prog.description}
-                </p>
+                {/* 2 Options Pill Box */}
+                <div className="mb-4 p-2.5 rounded-xl bg-surface-subtle border border-surface-border text-[11px] space-y-1">
+                  <div className="flex items-center justify-between font-bold text-brand-navy">
+                    <span>• بدون متابعة (تحميل فوري):</span>
+                    <span className="text-brand-coral font-black">350 درهم</span>
+                  </div>
+                  <div className="flex items-center justify-between font-bold text-brand-navy">
+                    <span>• مع متابعة أسبوعية:</span>
+                    <span className="text-brand-mint-dark font-black">550 درهم</span>
+                  </div>
+                </div>
 
                 {/* Key Benefits */}
-                <div className="space-y-2 mb-6 pt-4 border-t border-brand-navy/5">
+                <div className="space-y-1.5 mb-5 pt-2 border-t border-brand-navy/5">
                   {prog.whatsIncluded.slice(0, 3).map((feat, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-brand-navy/80">
                       <Check className="w-3.5 h-3.5 text-brand-mint-dark flex-shrink-0 mt-0.5" />
@@ -109,31 +123,11 @@ export const ProgrammesSection: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="pt-4 border-t border-brand-navy/10 flex flex-col gap-2">
-                <button
-                  onClick={() =>
-                    addToCart({
-                      id: prog.id,
-                      title: prog.title,
-                      subtitle: prog.subtitle,
-                      price: `$${prog.priceUsd} USD`,
-                      priceNumber: prog.priceUsd,
-                      currency: 'USD',
-                      type: 'program',
-                      slug: `/programs/${prog.slug}`,
-                      badge: prog.badge,
-                    })
-                  }
-                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft-sm flex items-center justify-center gap-2 transition-all duration-200 active:scale-95"
-                >
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>Add to Cart (${prog.priceUsd})</span>
-                </button>
-
                 <Link
                   to={`/programs/${prog.slug}`}
-                  className="w-full py-2 px-3 text-center text-xs font-semibold text-brand-navy/70 hover:text-brand-navy hover:bg-surface-subtle rounded-xl transition-colors flex items-center justify-center gap-1"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft-sm flex items-center justify-center gap-2 transition-all duration-200"
                 >
-                  <span>View Details & Sample Day</span>
+                  <span>عرض الخيارات والطلب ({prog.priceWithoutFollowUpAed || 350} - {prog.priceWithFollowUpAed || 550} درهم)</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

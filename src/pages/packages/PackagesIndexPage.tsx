@@ -82,7 +82,7 @@ export const PackagesIndexPage: React.FC = () => {
         </motion.div>
 
         {/* 3 Main Packages Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16 items-stretch">
           {PACKAGES_DATA.map((pkg, index) => {
             const isPopular = pkg.popular;
             return (
@@ -91,96 +91,94 @@ export const PackagesIndexPage: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
-                  isPopular
-                    ? 'bg-brand-navy text-white shadow-soft-xl border-2 border-brand-gold/60 lg:-translate-y-2'
-                    : 'bg-white text-brand-navy shadow-soft border border-surface-border hover:border-brand-mint'
+                className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col justify-between shadow-soft hover:shadow-soft-xl relative ${
+                  isPopular 
+                    ? 'border-brand-mint-dark ring-2 ring-brand-mint/50 lg:-translate-y-2' 
+                    : 'border-surface-border hover:border-brand-mint/80'
                 }`}
               >
                 {/* Popular Badge */}
                 {isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-gold text-brand-navy shadow-soft-sm flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>Most Popular Transformation</span>
-                    </span>
+                  <div className="absolute top-3 right-3 z-10 bg-white/95 text-brand-navy text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-sm flex items-center gap-1 border border-brand-mint/30">
+                    <Sparkles className="w-3 h-3 text-brand-gold" />
+                    <span>الأكثر طلباً • Most Popular</span>
                   </div>
                 )}
 
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className={`text-xs font-bold uppercase tracking-wider ${isPopular ? 'text-brand-gold' : 'text-brand-coral'}`}>
-                      {pkg.duration}
-                    </span>
+                  {/* Top Solid Color Header Bar */}
+                  <div 
+                    className="p-6 text-center text-white relative transition-colors duration-300"
+                    style={{ backgroundColor: pkg.headerColor || '#3C7D68' }}
+                  >
+                    <div className="text-2xl sm:text-3xl font-black mb-1 font-sans">
+                      {pkg.arabicName}
+                    </div>
+                    <div className="text-xs sm:text-sm font-extrabold tracking-widest uppercase opacity-90">
+                      {pkg.englishName}
+                    </div>
                   </div>
 
-                  <h3 className={`text-2xl font-extrabold mb-2 ${isPopular ? 'text-white' : 'text-brand-navy'}`}>
-                    {pkg.name}
-                  </h3>
-
-                  <p className={`text-xs leading-relaxed mb-6 ${isPopular ? 'text-white/80' : 'text-brand-navy/75'}`}>
-                    {pkg.tagline}
-                  </p>
-
-                  {/* Price */}
-                  <div className="mb-6 pb-6 border-b border-white/10">
-                    <div className="flex items-baseline gap-2">
-                      <span className={`text-4xl sm:text-5xl font-black ${isPopular ? 'text-brand-gold' : 'text-brand-navy'}`}>
-                        {pkg.priceDhs}
-                      </span>
-                      <span className={`text-lg font-bold ${isPopular ? 'text-white/80' : 'text-brand-navy/60'}`}>
-                        DHS
+                  <div className="p-6 sm:p-8">
+                    {/* Price */}
+                    <div className="text-center pb-6 mb-6 border-b border-brand-navy/10">
+                      <div className="flex items-baseline justify-center gap-2">
+                        <span className="text-4xl sm:text-5xl font-black text-brand-navy">
+                          {pkg.priceAed}
+                        </span>
+                        <span className="text-lg sm:text-xl font-bold text-brand-navy/80">
+                          درهم إماراتي
+                        </span>
+                      </div>
+                      <span className="text-xs text-brand-navy/60 font-medium block mt-1">
+                        {pkg.duration} • اشتراك كامل
                       </span>
                     </div>
-                    <span className={`text-xs block mt-1 ${isPopular ? 'text-white/70' : 'text-brand-navy/60'}`}>
-                      Equivalent to ~${pkg.priceUsd} USD
-                    </span>
-                  </div>
 
-                  {/* Features */}
-                  <div className="space-y-3 mb-8">
-                    {pkg.features.map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs">
-                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isPopular ? 'text-brand-mint' : 'text-brand-mint-dark'}`} />
-                        <span className={isPopular ? 'text-white/90' : 'text-brand-navy/85'}>{feat}</span>
-                      </div>
-                    ))}
+                    {/* Features with 🚩 */}
+                    <div className="space-y-4 mb-8" dir="rtl">
+                      {pkg.features.map((feat, i) => (
+                        <div key={i} className="flex items-center gap-3 text-right">
+                          <span className="text-base select-none flex-shrink-0" aria-hidden="true">
+                            🚩
+                          </span>
+                          <span className="text-sm sm:text-base font-bold text-brand-navy">
+                            {feat}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="space-y-2.5 pt-4 border-t border-white/10">
+                <div className="p-6 sm:p-8 pt-0 space-y-3">
                   <button
                     onClick={() =>
                       addToCart({
                         id: pkg.id,
-                        title: pkg.name,
-                        subtitle: `${pkg.duration} • Clinical Diet Plan`,
-                        price: `${pkg.priceDhs} DHS`,
-                        priceNumber: pkg.priceDhs,
-                        currency: 'DHS',
+                        title: `${pkg.arabicName} (${pkg.englishName})`,
+                        subtitle: `${pkg.duration} • اشتراك كامل`,
+                        price: `${pkg.priceAed} درهم إماراتي`,
+                        priceNumber: pkg.priceAed || 550,
+                        currency: 'AED',
                         type: 'package',
                         slug: `/packages/${pkg.slug}`,
                         badge: isPopular ? 'Popular' : undefined,
                       })
                     }
-                    className={`w-full py-3.5 px-6 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-soft-sm ${
-                      isPopular
-                        ? 'bg-brand-gold hover:bg-white text-brand-navy shadow-gold-glow'
-                        : 'bg-brand-coral hover:bg-brand-coral-dark text-white'
-                    }`}
+                    className="w-full py-3.5 px-6 rounded-2xl text-xs font-bold uppercase tracking-wider text-white shadow-soft transition-all flex items-center justify-center gap-2"
+                    style={{ backgroundColor: pkg.headerColor || '#3C7D68' }}
                   >
                     <ShoppingBag className="w-4 h-4" />
-                    <span>Select Package ({pkg.priceDhs} DHS)</span>
+                    <span>اختر الباقة ({pkg.priceAed} درهم)</span>
                   </button>
 
                   <Link
                     to={`/packages/${pkg.slug}`}
-                    className={`block text-center py-2 text-xs font-semibold rounded-xl transition-colors ${
-                      isPopular ? 'text-white/80 hover:text-white' : 'text-brand-navy/70 hover:text-brand-navy'
-                    }`}
+                    className="block text-center py-2 text-xs font-semibold rounded-xl text-brand-navy/70 hover:text-brand-navy transition-colors"
                   >
-                    View Full Details & Breakdown →
+                    عرض كامل تفاصيل الباقة / Full Details →
                   </Link>
                 </div>
               </motion.div>

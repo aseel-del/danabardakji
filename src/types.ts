@@ -16,26 +16,36 @@ export interface CartItem {
   subtitle: string;
   price: string;
   priceNumber: number;
-  currency: 'USD' | 'DHS';
+  currency: 'USD' | 'DHS' | 'AED';
   type: ItemType;
   slug: string;
   quantity: number;
   badge?: string;
   digitalDownloadUrl?: string;
+  selectedOption?: string;
 }
 
 export interface PackagePlan {
   id: string;
   slug: string;
   name: string;
+  arabicName?: string;
+  englishName?: string;
   priceDhs: number;
-  priceUsd: number;
+  priceAed?: number;
+  priceUsd?: number;
   duration: string;
   subscriberCount: number;
   popular?: boolean;
-  tagline: string;
-  description: string;
+  tagline?: string;
+  description?: string;
   features: string[];
+  gumroadUrl?: string;
+  headerColor?: string;
+  accentColor?: string;
+  zoomFollowUps?: number;
+  dietPlansCount?: number;
+  durationWeeks?: number;
   options?: {
     id: string;
     label: string;
@@ -49,8 +59,13 @@ export interface ProgramItem {
   id: string;
   slug: string;
   title: string;
+  arabicTitle?: string;
   subtitle: string;
-  priceUsd: number;
+  arabicSubtitle?: string;
+  priceWithoutFollowUpAed: number; // 350 AED
+  priceWithFollowUpAed: number;    // 550 AED
+  priceDhs?: number;
+  priceUsd?: number;
   category: 'protocol' | 'meal-plan' | 'guide';
   badge: string;
   description: string;
@@ -59,7 +74,9 @@ export interface ProgramItem {
   whatsIncluded: string[];
   duration: string;
   downloadFormat: string;
-  sampleMealSchedule: {
+  gumroadUrlWithoutFollowUp?: string;
+  gumroadUrlWithFollowUp?: string;
+  sampleMealSchedule?: {
     meal: string;
     timing: string;
     focus: string;

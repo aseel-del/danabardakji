@@ -11,6 +11,7 @@ interface CartContextType {
   setIsCartOpen: (open: boolean) => void;
   totalItems: number;
   subtotalUsd: number;
+  subtotalAed: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -70,8 +71,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const subtotalAed = cart.reduce((sum, item) => {
+    const itemPriceAed = (item.currency === 'AED' || item.currency === 'DHS') ? item.priceNumber : item.priceNumber * 3.6725;
+    return sum + itemPriceAed * item.quantity;
+  }, 0);
+
   const subtotalUsd = cart.reduce((sum, item) => {
-    const itemPriceUsd = item.currency === 'DHS' ? item.priceNumber / 3.67 : item.priceNumber;
+    const itemPriceUsd = (item.currency === 'AED' || item.currency === 'DHS') ? item.priceNumber / 3.6725 : item.priceNumber;
     return sum + itemPriceUsd * item.quantity;
   }, 0);
 
@@ -87,6 +93,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsCartOpen,
         totalItems,
         subtotalUsd,
+        subtotalAed,
       }}
     >
       {children}

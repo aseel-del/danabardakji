@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 
 export const CheckoutPage: React.FC = () => {
-  const { cart, subtotalUsd, clearCart } = useCart();
+  const { cart, subtotalUsd, subtotalAed, clearCart } = useCart();
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
@@ -37,7 +37,7 @@ export const CheckoutPage: React.FC = () => {
         type: i.type,
         downloadUrl: i.type === 'program' ? `/downloads/${i.id}.pdf` : undefined,
       })),
-      total: `$${subtotalUsd.toFixed(2)} USD`,
+      total: `${subtotalAed.toFixed(0)} درهم إماراتي (~$${subtotalUsd.toFixed(2)} USD)`,
     };
 
     // Save order in localStorage
@@ -296,16 +296,19 @@ export const CheckoutPage: React.FC = () => {
 
               <div className="pt-3 border-t border-brand-navy/10 space-y-2 text-xs text-brand-navy/75">
                 <div className="flex items-center justify-between">
-                  <span>Subtotal</span>
-                  <span className="font-bold text-brand-navy">${subtotalUsd.toFixed(2)} USD</span>
+                  <span>المجموع الفرعي</span>
+                  <span className="font-bold text-brand-navy">{subtotalAed.toFixed(0)} درهم إماراتي</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>Instant Delivery</span>
-                  <span className="font-bold text-brand-mint-dark">Free</span>
+                  <span>الوصول الرقمي والمتابعة</span>
+                  <span className="font-bold text-brand-mint-dark">فوري ومجاني</span>
                 </div>
                 <div className="pt-2 border-t border-brand-navy/10 flex items-center justify-between text-base font-black text-brand-navy">
-                  <span>Total Amount</span>
-                  <span className="text-2xl text-brand-coral">${subtotalUsd.toFixed(2)} USD</span>
+                  <span>المجموع النهائي</span>
+                  <div className="text-right">
+                    <span className="text-2xl text-brand-coral">{subtotalAed.toFixed(0)} <span className="text-xs font-bold text-brand-navy/70">درهم إماراتي</span></span>
+                    <span className="text-[10px] text-brand-navy/50 block font-normal">~${subtotalUsd.toFixed(2)} USD</span>
+                  </div>
                 </div>
               </div>
 

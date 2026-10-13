@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 export const CartDrawer: React.FC = () => {
-  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, totalItems, subtotalUsd } = useCart();
+  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, totalItems, subtotalUsd, subtotalAed } = useCart();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -172,20 +172,23 @@ export const CartDrawer: React.FC = () => {
                 <div className="p-6 bg-white border-t border-brand-navy/10 space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs text-brand-navy/70">
-                      <span>Subtotal</span>
+                      <span>المجموع الفرعي / Subtotal</span>
                       <span className="font-extrabold text-brand-navy">
-                        ${subtotalUsd.toFixed(2)} USD
+                        {subtotalAed.toFixed(0)} درهم إماراتي
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs text-brand-navy/70">
-                      <span>Delivery / Instant Access</span>
-                      <span className="font-bold text-brand-mint-dark">Free Digital Access</span>
+                      <span>الوصول الرقمي والمتابعة</span>
+                      <span className="font-bold text-brand-mint-dark">فوري ومباشر</span>
                     </div>
                     <div className="pt-2 border-t border-brand-navy/10 flex items-center justify-between">
-                      <span className="text-sm font-extrabold text-brand-navy">Estimated Total</span>
-                      <span className="text-xl font-black text-brand-navy">
-                        ${subtotalUsd.toFixed(2)} USD
-                      </span>
+                      <span className="text-sm font-extrabold text-brand-navy">المجموع الكلي / Total</span>
+                      <div className="text-right">
+                        <div className="text-xl font-black text-brand-navy">
+                          {subtotalAed.toFixed(0)} <span className="text-xs font-bold text-brand-navy/70">درهم إماراتي</span>
+                        </div>
+                        <span className="text-[10px] text-brand-navy/50 block">Equivalent to ~${subtotalUsd.toFixed(2)} USD</span>
+                      </div>
                     </div>
                   </div>
 

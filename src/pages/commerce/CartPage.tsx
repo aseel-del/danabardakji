@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 
 export const CartPage: React.FC = () => {
-  const { cart, removeFromCart, updateQuantity, clearCart, totalItems, subtotalUsd } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart, totalItems, subtotalUsd, subtotalAed } = useCart();
   const [promoCode, setPromoCode] = useState('');
   const [discountPercent, setDiscountPercent] = useState(0);
   const [promoMessage, setPromoMessage] = useState<{ text: string; isError?: boolean } | null>(null);
@@ -25,8 +25,10 @@ export const CartPage: React.FC = () => {
     }
   };
 
-  const discountAmount = (subtotalUsd * discountPercent) / 100;
-  const finalTotal = Math.max(0, subtotalUsd - discountAmount);
+  const discountAmountAed = (subtotalAed * discountPercent) / 100;
+  const finalTotalAed = Math.max(0, subtotalAed - discountAmountAed);
+  const discountAmountUsd = (subtotalUsd * discountPercent) / 100;
+  const finalTotalUsd = Math.max(0, subtotalUsd - discountAmountUsd);
 
   return (
     <div className="pt-32 pb-24 bg-mesh-subtle min-h-screen">
@@ -185,27 +187,30 @@ export const CartPage: React.FC = () => {
 
                 <div className="space-y-3 text-xs text-brand-navy/75">
                   <div className="flex items-center justify-between">
-                    <span>Subtotal ({totalItems} items)</span>
-                    <span className="font-bold text-brand-navy">${subtotalUsd.toFixed(2)} USD</span>
+                    <span>المجموع الفرعي ({totalItems} عناصر)</span>
+                    <span className="font-bold text-brand-navy">{subtotalAed.toFixed(0)} درهم إماراتي</span>
                   </div>
 
                   {discountPercent > 0 && (
                     <div className="flex items-center justify-between text-emerald-600 font-semibold">
-                      <span>Discount ({discountPercent}%)</span>
-                      <span>-${discountAmount.toFixed(2)} USD</span>
+                      <span>الخصم ({discountPercent}%)</span>
+                      <span>-{discountAmountAed.toFixed(0)} درهم</span>
                     </div>
                   )}
 
                   <div className="flex items-center justify-between">
-                    <span>Digital Delivery</span>
-                    <span className="font-bold text-brand-mint-dark">Instant (Free)</span>
+                    <span>الوصول الرقمي</span>
+                    <span className="font-bold text-brand-mint-dark">فوري ومجاني</span>
                   </div>
 
                   <div className="pt-3 border-t border-brand-navy/10 flex items-center justify-between">
-                    <span className="text-sm font-extrabold text-brand-navy">Estimated Total</span>
-                    <span className="text-2xl font-black text-brand-coral">
-                      ${finalTotal.toFixed(2)} USD
-                    </span>
+                    <span className="text-sm font-extrabold text-brand-navy">المجموع النهائي</span>
+                    <div className="text-right">
+                      <div className="text-2xl font-black text-brand-coral">
+                        {finalTotalAed.toFixed(0)} <span className="text-xs font-bold text-brand-navy/70">درهم إماراتي</span>
+                      </div>
+                      <span className="text-[10px] text-brand-navy/50 block">Equivalent to ~${finalTotalUsd.toFixed(2)} USD</span>
+                    </div>
                   </div>
                 </div>
 
