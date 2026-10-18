@@ -48,7 +48,7 @@ export const MoreThanNutritionPage: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8 cursor-pointer"
         >
           <GoogleIcon name={isRTL ? "arrow_forward" : "arrow_back"} className="text-base" />
-          <span>{isRTL ? 'الرجوع إلى صفحة عن دانا' : 'Back to About Dana'}</span>
+          <span>{isRTL ? 'الرجوع إلى صفحة عن دانة' : 'Back to About Dana'}</span>
         </Link>
 
         {/* Header */}
@@ -78,13 +78,13 @@ export const MoreThanNutritionPage: React.FC = () => {
 
           <p className="text-sm sm:text-base text-brand-navy/80 leading-relaxed font-normal">
             {isRTL 
-              ? 'في كتابيها "خرافات الحميات" و"100 سؤال وجواب في التغذية"، توضح دانا بردقجي كيف تسبب الحميات السريعة والقاسية ضرراً بالغاً لسرعة الحرق وتدخل الشخص في حلقة مفرغة من الحرمان ثم الانتكاس.'
+              ? 'في كتابيها "خرافات الحميات" و"100 سؤال وجواب في التغذية"، توضح دانة بردقجي كيف تسبب الحميات السريعة والقاسية ضرراً بالغاً لسرعة الحرق وتدخل الشخص في حلقة مفرغة من الحرمان ثم الانتكاس.'
               : 'In her two books, “Myths in Dieting” and “100 Questions and Answers in Nutrition”, Dana Bardakji explores how aggressive fads damage metabolic rate and create an exhausting cycle of restriction and rebound.'}
           </p>
 
           <p className="text-sm sm:text-base text-brand-navy/80 leading-relaxed font-normal">
             {isRTL 
-              ? 'يجمع منهج دانا الإكلينيكي بين الدقة العلمية البيوكيميائية والتعاطف الإنساني العميق. من خلال فهم فسيولوجيا جسمك وعلاقتك النفسية مع الطعام، يتحول الأكل من مصدر للتوتر اليومي إلى أداة للنشاط والحيوية.'
+              ? 'يجمع منهج دانة الإكلينيكي بين الدقة العلمية البيوكيميائية والتعاطف الإنساني العميق. من خلال فهم فسيولوجيا جسمك وعلاقتك النفسية مع الطعام، يتحول الأكل من مصدر للتوتر اليومي إلى أداة للنشاط والحيوية.'
               : 'Dana’s clinical approach combines rigorous biochemical precision with profound compassion. By understanding your unique physiology and psychological relationship with food, we transform eating from a source of daily stress into a powerful tool for energy, vitality, and self-care.'}
           </p>
         </div>

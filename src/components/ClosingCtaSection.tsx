@@ -53,7 +53,7 @@ export const ClosingCtaSection: React.FC = () => {
           className="text-base sm:text-lg text-brand-navy/80 max-w-2xl mx-auto leading-relaxed mb-10 font-normal"
         >
           {isRTL 
-            ? 'سواء كنت تبحثين عن خطة علاجية متكاملة للمتابعة الشخصية، أو استشارة تشخيصية مباشرة، تقدم لك الأخصائية دانا بردقجي الرعاية القائمة على الأسس العلمية والاهتمام الذي تستحقينه.'
+            ? 'سواء كنت تبحثين عن خطة علاجية متكاملة للمتابعة الشخصية، أو استشارة تشخيصية مباشرة، تقدم لك الأخصائية دانة بردقجي الرعاية القائمة على الأسس العلمية والاهتمام الذي تستحقينه.'
             : 'Whether you need a dedicated multi-week clinical transformation package or a single diagnostic consultation, Dana Bardakji provides the evidence-based care and empathy you deserve.'}
         </motion.p>
 

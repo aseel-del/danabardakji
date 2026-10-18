@@ -43,7 +43,7 @@ export const ContactSection: React.FC = () => {
 
               <p className="text-base text-brand-navy/80 leading-relaxed font-normal">
                 {isRTL 
-                  ? 'سواء كانت لديك استفسارات حول باقات المتابعة، أو ترغب في تقييم حالتك الصحية، أو حجز جلسة استشارية مع دانا، يسعدنا التواصل معك.'
+                  ? 'سواء كانت لديك استفسارات حول باقات المتابعة، أو ترغب في تقييم حالتك الصحية، أو حجز جلسة استشارية مع دانة، يسعدنا التواصل معك.'
                   : 'Whether you have questions regarding our clinical packages, need nutritional guidance, or wish to schedule a consultation, Dana is available to assist you.'}
               </p>
             </div>
@@ -133,7 +133,7 @@ export const ContactSection: React.FC = () => {
             </h3>
             <p className="text-sm text-brand-navy/70 mb-6">
               {isRTL 
-                ? 'يرجى تعبئة النموذج التالي وستتواصل معك دانا مباشرة لتأكيد التفاصيل ومواعيد المتابعة.'
+                ? 'يرجى تعبئة النموذج التالي وستتواصل معك دانة مباشرة لتأكيد التفاصيل ومواعيد المتابعة.'
                 : 'Fill out the form below and Dana will respond directly with consultation openings.'}
             </p>
 
@@ -147,7 +147,7 @@ export const ContactSection: React.FC = () => {
                 </h4>
                 <p className="text-sm text-brand-navy/80">
                   {isRTL 
-                    ? 'شكراً لتواصلك معنا! ستقوم الأخصائية دانا بمراجعة رسالتك والرد عليك عبر الواتساب أو البريد الإلكتروني خلال 24 ساعة.'
+                    ? 'شكراً لتواصلك معنا! ستقوم الأخصائية دانة بمراجعة رسالتك والرد عليك عبر الواتساب أو البريد الإلكتروني خلال 24 ساعة.'
                     : 'Thank you for reaching out! Dana will review your message and reply via email or WhatsApp within 24 hours.'}
                 </p>
                 <button
@@ -208,7 +208,7 @@ export const ContactSection: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-brand-navy/80 mb-1.5">
-                    {isRTL ? 'كيف يمكن للأخصائية دانا مساعدتك؟ *' : 'How can Dana help you? *'}
+                    {isRTL ? 'كيف يمكن للأخصائية دانة مساعدتك؟ *' : 'How can Dana help you? *'}
                   </label>
                   <textarea
                     rows={4}

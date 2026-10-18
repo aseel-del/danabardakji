@@ -30,7 +30,7 @@ export const WhatsAppButton: React.FC = () => {
 
   const handleSendMessage = (textToSend?: string) => {
     const defaultMsg = isRTL 
-      ? 'مرحباً دانا، أود الاستفسار عن استشارة التغذية العلاجية.'
+      ? 'مرحباً دانة، أود الاستفسار عن استشارة التغذية العلاجية.'
       : 'Hello Dana, I would like to inquire about a clinical nutrition consultation.';
     const finalMsg = textToSend || message || defaultMsg;
     const encoded = encodeURIComponent(finalMsg);
@@ -73,7 +73,7 @@ export const WhatsAppButton: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-                      {isRTL ? 'دانا بردقجي' : 'Dana Bardakji'}
+                      {isRTL ? 'دانة بردقجي' : 'Dana Bardakji'}
                     </h4>
                     <p className="text-[11px] text-brand-mint font-medium">
                       {isRTL ? 'أخصائية تغذية علاجية • تجيب عادة خلال دقائق' : 'Clinical Dietitian • Typically replies instantly'}
@@ -105,7 +105,7 @@ export const WhatsAppButton: React.FC = () => {
                 {/* Dana's incoming message bubble */}
                 <div className="flex flex-col items-start max-w-[90%]">
                   <div className={`bg-white p-3.5 rounded-2xl ${isRTL ? 'rounded-tr-sm' : 'rounded-tl-sm'} shadow-soft-sm border border-brand-navy/5 text-xs text-brand-navy leading-relaxed`}>
-                    <p className="font-semibold text-brand-navy mb-1">{isRTL ? 'دانا بردقجي' : 'Dana Bardakji'}</p>
+                    <p className="font-semibold text-brand-navy mb-1">{isRTL ? 'دانة بردقجي' : 'Dana Bardakji'}</p>
                     {isRTL 
                       ? 'أهلاً بك! كيف يمكنني مساعدتك في خطتك الغذائية أو استشارتك العلاجية اليوم؟'
                       : 'Hello! How can I assist you with your personalized nutrition plan or direct consultation today?'}

@@ -229,7 +229,7 @@ export const PackagesIndexPage: React.FC = () => {
           </h3>
           <p className="text-sm text-brand-navy/70 leading-relaxed font-normal">
             {isRTL 
-              ? 'متابعة شخصية مباشرة من الأخصائية دانا بردقجي، مراجعة دقيقة لنتائج الفحوصات المخبرية، متابعة أسبوعية مستمرة عبر واتساب، وبدائل مرنة تتناسب مع يومك وأهدافك الصحية.'
+              ? 'متابعة شخصية مباشرة من الأخصائية دانة بردقجي، مراجعة دقيقة لنتائج الفحوصات المخبرية، متابعة أسبوعية مستمرة عبر واتساب، وبدائل مرنة تتناسب مع يومك وأهدافك الصحية.'
               : 'Direct 1-on-1 nutritional guidance from Dana Bardakji, comprehensive laboratory review, weekly WhatsApp follow-ups, flexible food exchange substitutions, and customized progress adaptations.'}
           </p>
         </div>

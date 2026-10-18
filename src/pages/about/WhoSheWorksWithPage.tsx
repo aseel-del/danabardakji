@@ -95,7 +95,7 @@ export const WhoSheWorksWithPage: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8 cursor-pointer"
         >
           <GoogleIcon name={isRTL ? "arrow_forward" : "arrow_back"} className="text-base" />
-          <span>{isRTL ? 'الرجوع إلى صفحة عن دانا' : 'Back to About Dana'}</span>
+          <span>{isRTL ? 'الرجوع إلى صفحة عن دانة' : 'Back to About Dana'}</span>
         </Link>
 
         {/* Header */}
@@ -104,11 +104,11 @@ export const WhoSheWorksWithPage: React.FC = () => {
             {isRTL ? 'النطاق الإكلينيكي والحالات التي نتابعها' : 'Clinical Scope & Patient Profiles'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-4">
-            {isRTL ? 'الحالات التي تتابعها دانا بردقجي' : 'Who Dana Works With'}
+            {isRTL ? 'الحالات التي تتابعها دانة بردقجي' : 'Who Dana Works With'}
           </h1>
           <p className="text-base text-brand-navy/80 leading-relaxed max-w-3xl font-normal">
             {isRTL 
-              ? 'تقدم دانا علاجاً غذائياً إكلينيكياً تخصصياً لمختلف المراحل العمرية، محولةً التشخيصات الطبية المعقدة إلى خطط غذائية يومية واضحة ومستدامة.'
+              ? 'تقدم دانة علاجاً غذائياً إكلينيكياً تخصصياً لمختلف المراحل العمرية، محولةً التشخيصات الطبية المعقدة إلى خطط غذائية يومية واضحة ومستدامة.'
               : 'Dana provides specialized nutritional therapy for individuals across all life stages, translating complex medical diagnoses and metabolic roadblocks into clear, sustainable eating plans.'}
           </p>
         </div>
@@ -153,7 +153,7 @@ export const WhoSheWorksWithPage: React.FC = () => {
           </h3>
           <p className="text-sm text-brand-navy/75 max-w-xl mx-auto">
             {isRTL 
-              ? 'احجز جلسة استشارة سريرية تشخيصية مباشرة عبر الفيديو مع دانا لتقييم تاريخك المرضي وفحوصاتك المخبرية.'
+              ? 'احجز جلسة استشارة سريرية تشخيصية مباشرة عبر الفيديو مع دانة لتقييم تاريخك المرضي وفحوصاتك المخبرية.'
               : 'Book a direct 1-on-1 clinical consultation with Dana to evaluate your lab biomarkers and discuss your customized therapeutic roadmap.'}
           </p>
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">

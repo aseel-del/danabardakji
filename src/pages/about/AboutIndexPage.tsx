@@ -28,7 +28,7 @@ export const AboutIndexPage: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="text-3xl sm:text-5xl font-extrabold text-brand-navy tracking-tight mb-4"
           >
-            {isRTL ? 'عن دانا بردقجي' : 'About Dana Bardakji'}
+            {isRTL ? 'عن دانة بردقجي' : 'About Dana Bardakji'}
           </motion.h1>
 
           <motion.p
@@ -48,7 +48,7 @@ export const AboutIndexPage: React.FC = () => {
               to="/about/meet"
               className="px-4 py-2 rounded-xl text-xs font-semibold bg-white hover:bg-brand-coral hover:text-white text-brand-navy border border-brand-navy/10 shadow-soft-xs transition-all cursor-pointer"
             >
-              {isRTL ? 'عن دانا ومؤهلاتها' : 'Meet Dana & Background'}
+              {isRTL ? 'عن دانة ومؤهلاتها' : 'Meet Dana & Background'}
             </Link>
             <Link
               to="/about/who"
@@ -106,7 +106,7 @@ export const AboutIndexPage: React.FC = () => {
 
             <p className="text-sm sm:text-base text-brand-navy/85 leading-relaxed font-normal">
               {isRTL 
-                ? 'دانا بردقجي أخصائية تغذية معتمدة حاصلة على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، ودبلوم عالي في العلاجات الغذائية السريرية من جامعة ستون بريدج في بريطانيا (Stone Bridge University - UK).'
+                ? 'دانة بردقجي أخصائية تغذية معتمدة حاصلة على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، ودبلوم عالي في العلاجات الغذائية السريرية من جامعة ستون بريدج في بريطانيا (Stone Bridge University - UK).'
                 : 'Dana is a certified Dietitian with a B.Sc. degree in Nutrition and Food Technology from the University of Jordan and a higher Diploma in clinical Nutritional treatments from Stone Bridge University- UK.'}
             </p>
 
@@ -118,7 +118,7 @@ export const AboutIndexPage: React.FC = () => {
 
             <p className="text-sm sm:text-base text-brand-navy/85 leading-relaxed font-normal">
               {isRTL 
-                ? 'واصلت دانا مسيرتها بتأسيس NutriCenter في عمّان لتقديم الاستشارات الغذائية العائلية، كما ألفت كتابين معتمدين: "100 سؤال وجواب في التغذية" و"خرافات الحميات"، مع ظهور إعلامي مستمر عبر المحطات التلفزيونية والإذاعية العربية.'
+                ? 'واصلت دانة مسيرتها بتأسيس NutriCenter في عمّان لتقديم الاستشارات الغذائية العائلية، كما ألفت كتابين معتمدين: "100 سؤال وجواب في التغذية" و"خرافات الحميات"، مع ظهور إعلامي مستمر عبر المحطات التلفزيونية والإذاعية العربية.'
                 : 'Dana continued her path by co-founding NutriCenter in Amman-Jordan for family nutritional consultations and has authored two acclaimed books: “100 Questions and answers in Nutrition” and “Myths in Dieting”, alongside frequent appearances on TV and radio.'}
             </p>
 
@@ -130,7 +130,7 @@ export const AboutIndexPage: React.FC = () => {
               >
                 <GoogleIcon name="badge" className="text-2xl text-brand-coral mb-2 group-hover:scale-110 transition-transform" />
                 <h4 className="text-xs font-extrabold text-brand-navy group-hover:text-brand-coral flex items-center justify-between">
-                  <span>{isRTL ? 'عن دانا ومؤهلاتها' : 'Meet Dana'}</span>
+                  <span>{isRTL ? 'عن دانة ومؤهلاتها' : 'Meet Dana'}</span>
                   <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-xs" />
                 </h4>
                 <p className="text-[11px] text-brand-navy/60 mt-1">

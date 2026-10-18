@@ -215,7 +215,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
             className="text-base sm:text-lg text-brand-navy/80 leading-relaxed font-normal"
           >
             {isRTL 
-              ? 'خطط وبرامج غذائية علاجية مخصصة لحالتك الصحية وأهدافك البدنية، مصممة بإشراف الأخصائية دانا بردقجي.'
+              ? 'خطط وبرامج غذائية علاجية مخصصة لحالتك الصحية وأهدافك البدنية، مصممة بإشراف الأخصائية دانة بردقجي.'
               : 'Diet plans and clinical methods personalized to your unique health goals and metabolic needs, designed by Dana Bardakji.'}
           </motion.p>
 

@@ -188,7 +188,7 @@ export const PremiumPackagePage: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-xs font-bold text-white/80 hover:text-brand-gold transition-colors inline-flex items-center gap-1.5"
                 >
-                  <span>{isRTL ? 'لديك استفسار؟ تحدث مع دانا عبر واتساب' : 'Have questions? Chat with Dana on WhatsApp'}</span>
+                  <span>{isRTL ? 'لديك استفسار؟ تحدث مع دانة عبر واتساب' : 'Have questions? Chat with Dana on WhatsApp'}</span>
                   <span dir="ltr" className="font-semibold text-white/90">(+962 7 9222 2058)</span>
                 </a>
               </div>

@@ -17,7 +17,7 @@ export const MeetDanaPage: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8 cursor-pointer"
         >
           <GoogleIcon name={isRTL ? "arrow_forward" : "arrow_back"} className="text-base" />
-          <span>{isRTL ? 'الرجوع إلى صفحة عن دانا' : 'Back to About Dana'}</span>
+          <span>{isRTL ? 'الرجوع إلى صفحة عن دانة' : 'Back to About Dana'}</span>
         </Link>
 
         {/* Header */}
@@ -26,7 +26,7 @@ export const MeetDanaPage: React.FC = () => {
             {isRTL ? 'المؤهلات العلمية والمسيرة المهنية' : 'Clinical Background & Career Journey'}
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-4">
-            {isRTL ? 'عن الأخصائية دانا بردقجي' : 'Meet Dana Bardakji'}
+            {isRTL ? 'عن الأخصائية دانة بردقجي' : 'Meet Dana Bardakji'}
           </h1>
           <p className="text-base text-brand-navy/80 leading-relaxed max-w-3xl font-normal">
             {isRTL 
@@ -52,7 +52,7 @@ export const MeetDanaPage: React.FC = () => {
               </h3>
               <p className="text-sm text-brand-navy/80 leading-relaxed font-normal">
                 {isRTL 
-                  ? 'حصلت دانا على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، تلاها دبلوم عالي في العلاجات الغذائية السريرية من جامعة ستون بريدج في المملكة المتحدة (Stone Bridge University - UK).'
+                  ? 'حصلت دانة على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، تلاها دبلوم عالي في العلاجات الغذائية السريرية من جامعة ستون بريدج في المملكة المتحدة (Stone Bridge University - UK).'
                   : 'Dana earned her Bachelor of Science degree in Nutrition and Food Technology from the University of Jordan, followed by a post-graduate Higher Diploma in Clinical Nutritional Treatments from Stone Bridge University in the United Kingdom.'}
               </p>
             </div>
@@ -92,7 +92,7 @@ export const MeetDanaPage: React.FC = () => {
               </h3>
               <p className="text-sm text-brand-navy/80 leading-relaxed font-normal">
                 {isRTL 
-                  ? 'انطلاقاً من رسالتها في نشر الوعي الصحي الأسري، شاركت دانا في تأسيس NutriCenter في عمّان–الأردن، لتقديم الاستشارات الغذائية للعائلات، وتدريب الكوادر، والمتابعة الإكلينيكية المستمرة.'
+                  ? 'انطلاقاً من رسالتها في نشر الوعي الصحي الأسري، شاركت دانة في تأسيس NutriCenter في عمّان–الأردن، لتقديم الاستشارات الغذائية للعائلات، وتدريب الكوادر، والمتابعة الإكلينيكية المستمرة.'
                   : 'Continuing her mission to empower families with practical health education, Dana co-founded NutriCenter in Amman–Jordan, providing family consultations, specialized training, and clinical metabolic monitoring.'}
               </p>
             </div>
@@ -112,7 +112,7 @@ export const MeetDanaPage: React.FC = () => {
               </h3>
               <p className="text-sm text-brand-navy/80 leading-relaxed font-normal">
                 {isRTL 
-                  ? 'ألفت دانا كتابين واسعي الانتشار: "100 سؤال وجواب في التغذية" و"خرافات الحميات"، لتصحيح المفاهيم الخاطئة وتوضيح العادات الصحية القائمة على الأبحاث. وحلت ضيفة خبيرة على كبرى البرامج التلفزيونية والإذاعية في عمّان وأبوظبي.'
+                  ? 'ألفت دانة كتابين واسعي الانتشار: "100 سؤال وجواب في التغذية" و"خرافات الحميات"، لتصحيح المفاهيم الخاطئة وتوضيح العادات الصحية القائمة على الأبحاث. وحلت ضيفة خبيرة على كبرى البرامج التلفزيونية والإذاعية في عمّان وأبوظبي.'
                   : 'Dana has authored two widely read books: “100 Questions and answers in Nutrition” and “Myths in Dieting”, debunking fads and clarifying evidence-based habits. She has been a regular invited guest expert on major TV and radio programs in Amman and Abu Dhabi.'}
               </p>
             </div>
@@ -122,7 +122,7 @@ export const MeetDanaPage: React.FC = () => {
         {/* CTA Banner */}
         <div className="mt-14 p-8 rounded-3xl bg-brand-navy text-white text-center space-y-4">
           <h3 className="text-2xl font-extrabold text-white">
-            {isRTL ? 'ابدأ رحلتك الصحية مباشرة مع دانا' : 'Work Directly with Dana'}
+            {isRTL ? 'ابدأ رحلتك الصحية مباشرة مع دانة' : 'Work Directly with Dana'}
           </h3>
           <p className="text-sm text-brand-mint max-w-xl mx-auto">
             {isRTL 

@@ -158,7 +158,7 @@ export const Navbar: React.FC = () => {
                         {isRTL ? 'استشارة فردية (50$)' : '1-on-1 Consultation ($50)'}
                       </div>
                       <div className="text-[11px] text-brand-navy/60">
-                        {isRTL ? 'جلسة تقييم سريري مع دانا' : 'Diagnostic Session with Dana'}
+                        {isRTL ? 'جلسة تقييم سريري مع دانة' : 'Diagnostic Session with Dana'}
                       </div>
                     </Link>
                   </div>
@@ -278,7 +278,7 @@ export const Navbar: React.FC = () => {
                       to="/about/meet"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">{isRTL ? 'عن دانا ومؤهلاتها' : 'Meet Dana'}</div>
+                      <div className="font-bold">{isRTL ? 'عن دانة ومؤهلاتها' : 'Meet Dana'}</div>
                       <div className="text-[11px] text-brand-navy/60">{isRTL ? 'الشهادات والخبرة السريرية' : 'B.Sc., UK Higher Diploma & Books'}</div>
                     </Link>
                     <Link

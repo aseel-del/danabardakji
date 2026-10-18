@@ -40,7 +40,7 @@ export const PrivacyPolicyPage: React.FC = () => {
               </h2>
               <p>
                 {isRTL 
-                  ? 'تلتزم أخصائية التغذية دانا بردقجي بأعلى معايير حماية البيانات السريرية والصحية. جميع الاستبيانات، نتائج التحاليل المخبرية، قياسات مكونات الجسم، والملاحظات الغذائية التي تقدمها تعامل بسرية طبية تامة ولا تتم مشاركتها أو بيعها لأي جهة.'
+                  ? 'تلتزم أخصائية التغذية دانة بردقجي بأعلى معايير حماية البيانات السريرية والصحية. جميع الاستبيانات، نتائج التحاليل المخبرية، قياسات مكونات الجسم، والملاحظات الغذائية التي تقدمها تعامل بسرية طبية تامة ولا تتم مشاركتها أو بيعها لأي جهة.'
                   : 'Dana Bardakji adheres to the highest standards of clinical and medical data protection. All health questionnaires, lab results, body composition data, and dietary notes you provide are held in strict medical confidence and are never shared, sold, or disclosed to third parties.'}
               </p>
             </div>
@@ -82,7 +82,7 @@ export const PrivacyPolicyPage: React.FC = () => {
               </h2>
               <p>
                 {isRTL 
-                  ? 'نستخدم بروتوكول التشفير SSL 256-bit عبر كامل الموقع. تحفظ ملفات التقييم ومتابعات المراجعين في مجلدات مشفرة لا يمكن الوصول إليها إلا من قِبل الأخصائية دانا بردقجي حصراً.'
+                  ? 'نستخدم بروتوكول التشفير SSL 256-bit عبر كامل الموقع. تحفظ ملفات التقييم ومتابعات المراجعين في مجلدات مشفرة لا يمكن الوصول إليها إلا من قِبل الأخصائية دانة بردقجي حصراً.'
                   : 'We employ 256-bit SSL encryption across all web interactions. Your intake documents and progress check-ins are stored in encrypted client folders accessible only by certified dietitian Dana Bardakji.'}
               </p>
             </div>

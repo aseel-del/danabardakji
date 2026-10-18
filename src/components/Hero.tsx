@@ -87,7 +87,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
             className="text-base sm:text-lg lg:text-xl text-brand-navy/75 leading-relaxed max-w-2xl mx-auto mb-16 sm:mb-20 font-normal"
           >
             {isRTL 
-              ? 'برامج واستشارات علاجية مبنية على أحدث الأدلة العلمية والفحوصات المخبرية لتحقيق توازن صحي مستدام وخالٍ من الحرمان. بإشراف مباشر من الأخصائية دانا بردقجي وخبرة سريرية تمتد لأكثر من 15 عاماً.'
+              ? 'برامج واستشارات علاجية مبنية على أحدث الأدلة العلمية والفحوصات المخبرية لتحقيق توازن صحي مستدام وخالٍ من الحرمان. بإشراف مباشر من الأخصائية دانة بردقجي وخبرة سريرية تمتد لأكثر من 15 عاماً.'
               : 'Evidence-based dietary programs tailored to your biochemistry, clinical health needs, and personal lifestyle. Guided by 15+ years of specialized medical practice in Abu Dhabi & Amman.'}
           </motion.p>
 

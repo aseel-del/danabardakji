@@ -40,7 +40,7 @@ export const RefundPolicyPage: React.FC = () => {
               </h2>
               <p>
                 {isRTL 
-                  ? 'نظراً للطبيعة الفردية التخصصية للعلاج الغذائي الإكلينيكي، تتطلب الباقات دراسة مفصلة للحالة وتحليلاً للفحوصات وإعداد خطة غذائية خاصة بك من قِبل دانا بردقجي.'
+                  ? 'نظراً للطبيعة الفردية التخصصية للعلاج الغذائي الإكلينيكي، تتطلب الباقات دراسة مفصلة للحالة وتحليلاً للفحوصات وإعداد خطة غذائية خاصة بك من قِبل دانة بردقجي.'
                   : 'Due to the bespoke nature of personalized medical nutrition therapy, our clinical packages involve extensive case preparation, laboratory analysis, and customized diet formulation by Dana Bardakji.'}
               </p>
               <ul className={`list-disc ${isRTL ? 'pr-5' : 'pl-5'} mt-2 space-y-1.5 text-xs text-brand-navy/80`}>

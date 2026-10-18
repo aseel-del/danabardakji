@@ -122,7 +122,7 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                     </div>
                     <p className="text-xs text-brand-navy/75 leading-relaxed">
                       {isRTL 
-                        ? 'ملف البرنامج كامل PDF + متابعة وتوجيه أسبوعي مباشر عبر واتساب مع دانا بردقجي.'
+                        ? 'ملف البرنامج كامل PDF + متابعة وتوجيه أسبوعي مباشر عبر واتساب مع دانة بردقجي.'
                         : 'Full PDF Protocol Guide + direct weekly WhatsApp accountability check-ins with Dana.'}
                     </p>
                   </div>
@@ -199,12 +199,12 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 {withFollowUp ? (
                   <div className="flex items-center gap-2.5 font-bold text-brand-navy">
                     <GoogleIcon name="support_agent" className="text-brand-mint-dark text-base" />
-                    <span>{isRTL ? 'متابعة أسبوعية مستمرة عبر واتساب مع دانا' : 'Direct weekly WhatsApp accountability with Dana'}</span>
+                    <span>{isRTL ? 'متابعة أسبوعية مستمرة عبر واتساب مع دانة' : 'Direct weekly WhatsApp accountability with Dana'}</span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-2.5">
                     <GoogleIcon name="verified" className="text-brand-mint-dark text-base" />
-                    <span>{isRTL ? 'دليل سريري موثوق من الأخصائية دانا بردقجي' : 'Clinical guide certified by Dana Bardakji'}</span>
+                    <span>{isRTL ? 'دليل سريري موثوق من الأخصائية دانة بردقجي' : 'Clinical guide certified by Dana Bardakji'}</span>
                   </div>
                 )}
               </div>

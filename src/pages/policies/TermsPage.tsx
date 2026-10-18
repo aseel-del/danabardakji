@@ -40,7 +40,7 @@ export const TermsPage: React.FC = () => {
               </h2>
               <p>
                 {isRTL 
-                  ? 'دانا بردقجي أخصائية تغذية علاجية معتمدة (بكالوريوس تغذية وتكنولوجيا غذاء ودبلوم عالي بريطاني). الخطط الغذائية والاستشارات والبرامج المقدمة مصممة للعلاج الغذائي الإكلينيكي وبناء نمط حياة صحي. ولا تُعد بديلاً عن الرعاية الطبية الطارئة أو التدخلات الدوائية والجراحية التي يقررها طبيبك المعالج.'
+                  ? 'دانة بردقجي أخصائية تغذية علاجية معتمدة (بكالوريوس تغذية وتكنولوجيا غذاء ودبلوم عالي بريطاني). الخطط الغذائية والاستشارات والبرامج المقدمة مصممة للعلاج الغذائي الإكلينيكي وبناء نمط حياة صحي. ولا تُعد بديلاً عن الرعاية الطبية الطارئة أو التدخلات الدوائية والجراحية التي يقررها طبيبك المعالج.'
                   : 'Dana Bardakji is a certified Clinical Dietitian (B.Sc. Nutrition & UK Higher Diploma). The nutritional plans, protocols, and consultations provided are designed for clinical dietary therapy, habit formation, and wellness guidance. They are not intended as a substitute for acute emergency medical care, emergency pharmacological interventions, or surgical diagnoses.'}
               </p>
             </div>
@@ -62,7 +62,7 @@ export const TermsPage: React.FC = () => {
               </h2>
               <p>
                 {isRTL 
-                  ? 'جميع كتيبات الوجبات بصيغة PDF، الأدلة العلاجية، والكتب التي ألفتها دانا بردقجي محمية بموجب قوانين الملكية الفكرية وحقوق النشر الدولية. النسخ التي يتم شراؤها مرخصة حصراً للاستخدام الشخصي للمشتري ولا يجوز إعادة بيعها أو توزيعها أو نشرها.'
+                  ? 'جميع كتيبات الوجبات بصيغة PDF، الأدلة العلاجية، والكتب التي ألفتها دانة بردقجي محمية بموجب قوانين الملكية الفكرية وحقوق النشر الدولية. النسخ التي يتم شراؤها مرخصة حصراً للاستخدام الشخصي للمشتري ولا يجوز إعادة بيعها أو توزيعها أو نشرها.'
                   : 'All digital meal plan PDFs, protocol guides, and books authored by Dana Bardakji are protected by international copyright law. Guides purchased are licensed strictly for personal, non-commercial use by the single buyer and may not be distributed, published, or re-sold.'}
               </p>
             </div>

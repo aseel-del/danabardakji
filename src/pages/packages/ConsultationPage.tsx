@@ -13,7 +13,7 @@ export const ConsultationPage: React.FC = () => {
 
   const handleWhatsAppBooking = () => {
     const text = isRTL
-      ? `مرحباً دانا، أود حجز جلسة استشارة سريرية فردية ($50 / 185 درهم).\nطريقة الجلسة: ${consultationMode}\nالوقت المفضل: ${preferredTime}`
+      ? `مرحباً دانة، أود حجز جلسة استشارة سريرية فردية ($50 / 185 درهم).\nطريقة الجلسة: ${consultationMode}\nالوقت المفضل: ${preferredTime}`
       : `Hello Dana, I would like to book a 1-on-1 clinical consultation ($50 USD / 185 AED).\nMode: ${consultationMode}\nPreferred Time: ${preferredTime}`;
     const url = `https://api.whatsapp.com/send?phone=962792222058&text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -48,7 +48,7 @@ export const ConsultationPage: React.FC = () => {
               </h1>
               <p className="text-base text-brand-navy/80 leading-relaxed font-normal">
                 {isRTL 
-                  ? 'جلسة تشخيصية إكلينيكية متعمقة لتقييم تاريخك الصحي، الفحوصات المخبرية، نمط الحياة، والأهداف العلاجية مع الأخصائية دانا بردقجي.'
+                  ? 'جلسة تشخيصية إكلينيكية متعمقة لتقييم تاريخك الصحي، الفحوصات المخبرية، نمط الحياة، والأهداف العلاجية مع الأخصائية دانة بردقجي.'
                   : CONSULTATION_DATA.description}
               </p>
               <div className="mt-3 p-3.5 rounded-xl bg-brand-coral/10 border border-brand-coral/20 text-xs text-brand-coral font-bold flex items-center gap-2">

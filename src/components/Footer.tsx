@@ -163,7 +163,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs text-white/75 font-medium">
               <li>
                 <Link to="/about/meet" className="hover:text-brand-coral transition-colors">
-                  {isRTL ? 'عن دانا ومؤهلاتها' : 'Meet Dana'}
+                  {isRTL ? 'عن دانة ومؤهلاتها' : 'Meet Dana'}
                 </Link>
               </li>
               <li>
@@ -200,7 +200,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-2">
             <span>
               {isRTL 
-                ? `© ${currentYear} دانا بردقجي. جميع الحقوق محفوظة.`
+                ? `© ${currentYear} دانة بردقجي. جميع الحقوق محفوظة.`
                 : `© ${currentYear} Dana Bardakji. All rights reserved.`}
             </span>
             <span>•</span>

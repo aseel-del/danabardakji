@@ -56,7 +56,7 @@ export const AboutSection: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-brand-navy">
-                      {isRTL ? 'دانا بردقجي' : 'Dana Bardakji'}
+                      {isRTL ? 'دانة بردقجي' : 'Dana Bardakji'}
                     </h4>
                     <p className="text-[11px] text-brand-navy/70">
                       {isRTL ? 'أخصائية تغذية سريرية' : 'Clinical Dietitian'}
@@ -85,12 +85,12 @@ export const AboutSection: React.FC = () => {
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy tracking-tight mb-6">
-              {isRTL ? 'عن الأخصائية دانا بردقجي' : 'About Dana Bardakji'}
+              {isRTL ? 'عن الأخصائية دانة بردقجي' : 'About Dana Bardakji'}
             </h2>
 
             <p className="text-base sm:text-lg text-brand-navy/85 leading-relaxed mb-8 font-normal">
               {isRTL
-                ? 'دانا أخصائية تغذية علاجية معتمدة حاصلة على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، ودبلوم عالي في العلاجات الغذائية السريرية من كلية ستون بريدج في بريطانيا. بدأت مسيرتها المهنية في أبوظبي بدولة الإمارات كأخصائية تغذية في مركز طبي متخصص لصحة المرأة والتوليد، واكتسبت خبرة عميقة في إعداد الخطط الغذائية العلاجية لحالات السكري، ضغط الدم، اضطرابات الجهاز الهضمي، مقاومة الأنسولين، والسمنة المفرطة.'
+                ? 'دانة أخصائية تغذية علاجية معتمدة حاصلة على درجة البكالوريوس في التغذية وتكنولوجيا الغذاء من الجامعة الأردنية، ودبلوم عالي في العلاجات الغذائية السريرية من كلية ستون بريدج في بريطانيا. بدأت مسيرتها المهنية في أبوظبي بدولة الإمارات كأخصائية تغذية في مركز طبي متخصص لصحة المرأة والتوليد، واكتسبت خبرة عميقة في إعداد الخطط الغذائية العلاجية لحالات السكري، ضغط الدم، اضطرابات الجهاز الهضمي، مقاومة الأنسولين، والسمنة المفرطة.'
                 : 'Dana is a certified Dietitian with a B.Sc. degree in Nutrition and Food Technology from the University of Jordan and a higher Diploma in clinical Nutritional treatments from Stonebridge Associated Colleges (UK). She started her clinical practice in Abu Dhabi (UAE) as a specialized dietitian in a Women & Obstetrics medical center, developing tailored dietary therapies for metabolic conditions, diabetes, hypertension, food intolerances, and sustainable body recomposition.'}
             </p>
 

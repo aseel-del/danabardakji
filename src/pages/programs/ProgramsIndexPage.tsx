@@ -52,7 +52,7 @@ export const ProgramsIndexPage: React.FC = () => {
             className="text-base sm:text-lg text-brand-navy/80 leading-relaxed font-normal"
           >
             {isRTL 
-              ? 'أدلة وبرامج غذائية علاجية سريرية صممتها أخصائية التغذية دانا بردقجي. تحميل فوري بصيغة PDF مع وصفات كاملة وقوائم مشتريات وقواعد توازن الأيض.'
+              ? 'أدلة وبرامج غذائية علاجية سريرية صممتها أخصائية التغذية دانة بردقجي. تحميل فوري بصيغة PDF مع وصفات كاملة وقوائم مشتريات وقواعد توازن الأيض.'
               : 'Self-guided clinical dietary protocols formulated by certified clinical dietitian Dana Bardakji. Instant digital PDF access with comprehensive recipes, grocery checklists, and metabolic rules.'}
           </motion.p>
 
