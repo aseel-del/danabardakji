@@ -210,12 +210,13 @@ export const Footer: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex items-center gap-1 text-white/75">
-            <span>Designed by</span>
+          <div className="flex items-center gap-1.5 text-white/75">
+            <span>{isRTL ? 'تصميم وتطوير بواسطة' : 'Designed by'}</span>
             <a
               href="https://pixl4.com"
               target="_blank"
               rel="noopener noreferrer"
+              dir="ltr"
               className="text-brand-gold hover:text-white font-bold transition-colors underline decoration-brand-gold/40 hover:decoration-white"
             >
               PiXL4
