@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, MessageCircle, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
+import { GoogleIcon } from './common/GoogleIcon';
 
 export const ClosingCtaSection: React.FC = () => {
+  const { isRTL } = useLanguage();
+
   return (
     <section className="py-24 bg-gradient-to-b from-surface-subtle via-white to-surface-subtle relative overflow-hidden">
       {/* Decorative ambient blurred blobs */}
@@ -18,8 +21,8 @@ export const ClosingCtaSection: React.FC = () => {
           viewport={{ once: true }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/20 text-brand-coral text-xs font-bold mb-6"
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Sustainable Living • Clinical Excellence</span>
+          <GoogleIcon name="health_and_safety" className="text-sm" />
+          <span>{isRTL ? 'نمط حياة مستدام • تميز سريري' : 'Sustainable Living • Clinical Excellence'}</span>
         </motion.div>
 
         {/* Closing Headline */}
@@ -30,7 +33,15 @@ export const ClosingCtaSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy tracking-tight leading-[1.2] mb-6"
         >
-          Take the First Step Toward Your <span className="text-brand-coral">Healthiest Self</span>
+          {isRTL ? (
+            <>
+              ابدأ خطوتك الأولى نحو <span className="text-brand-coral">صحة أفضل وأكثر حيوية</span>
+            </>
+          ) : (
+            <>
+              Take the First Step Toward Your <span className="text-brand-coral">Healthiest Self</span>
+            </>
+          )}
         </motion.h2>
 
         {/* Closing Body Text */}
@@ -41,7 +52,9 @@ export const ClosingCtaSection: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-base sm:text-lg text-brand-navy/80 max-w-2xl mx-auto leading-relaxed mb-10 font-normal"
         >
-          Whether you need a dedicated 12-week clinical disease management plan or a single diagnostic consultation, Dana Bardakji provides the evidence-based care and empathy you deserve.
+          {isRTL 
+            ? 'سواء كنت تبحثين عن خطة علاجية متكاملة للمتابعة الشخصية، أو استشارة تشخيصية مباشرة، تقدم لك الأخصائية دانا بردقجي الرعاية القائمة على الأسس العلمية والاهتمام الذي تستحقينه.'
+            : 'Whether you need a dedicated multi-week clinical transformation package or a single diagnostic consultation, Dana Bardakji provides the evidence-based care and empathy you deserve.'}
         </motion.p>
 
         {/* Action Buttons */}
@@ -56,28 +69,28 @@ export const ClosingCtaSection: React.FC = () => {
             to="/packages/consultation"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>Book Consultation ($50 USD)</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>{isRTL ? 'حجز استشارة خاصة ($50)' : 'Book Consultation ($50 USD)'}</span>
+            <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-base" />
           </Link>
 
           <Link
             to="/packages"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-sm font-bold uppercase tracking-wider text-brand-navy bg-white hover:bg-surface-subtle border border-brand-navy/15 shadow-soft-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>Browse Packages</span>
+            <span>{isRTL ? 'تصفح باقات الاشتراك' : 'Browse Packages'}</span>
           </Link>
         </motion.div>
 
         {/* Trust Badges */}
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-brand-navy/60">
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-brand-mint-dark" />
-            <span>Strict Client Confidentiality</span>
+            <GoogleIcon name="lock" className="text-sm text-brand-mint-dark" />
+            <span>{isRTL ? 'سرية تامة لبيانات العميل والتحاليل' : 'Strict Client Confidentiality'}</span>
           </div>
           <span>•</span>
           <div className="flex items-center gap-1.5">
-            <MessageCircle className="w-4 h-4 text-brand-mint-dark" />
-            <span>Continuous WhatsApp Accountability</span>
+            <GoogleIcon name="chat" className="text-sm text-brand-mint-dark" />
+            <span>{isRTL ? 'متابعة مستمرة وتواصل دائم عبر واتساب' : 'Continuous WhatsApp Accountability'}</span>
           </div>
         </div>
       </div>

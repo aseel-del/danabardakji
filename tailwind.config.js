@@ -31,6 +31,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        arabic: ['Almarai', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {
         'soft-sm': '0 2px 8px -2px rgba(16, 56, 85, 0.05)',

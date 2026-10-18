@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { GoogleIcon } from "./common/GoogleIcon";
 
 export const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,7 +36,7 @@ export const ScrollToTop: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 30 }}
           transition={{ type: "spring", stiffness: 350, damping: 25 }}
-          className="fixed bottom-[5.5rem] right-6 z-40 group"
+          className="fixed bottom-[5.5rem] right-6 z-40 group floating-scroll-to-top"
         >
           <motion.button
             onClick={scrollToTop}
@@ -52,17 +52,17 @@ export const ScrollToTop: React.FC = () => {
                 ? { duration: 0.6, ease: "easeOut" }
                 : { repeat: Infinity, duration: 2.4, ease: "easeInOut" }
             }
-            className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-navy/90 hover:bg-brand-navy text-brand-mint border border-brand-mint/40 shadow-soft-lg hover:shadow-mint-glow backdrop-blur-md transition-colors"
+            className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-navy/90 hover:bg-brand-navy text-brand-mint border border-brand-mint/40 shadow-soft-lg hover:shadow-mint-glow backdrop-blur-md transition-colors cursor-pointer"
             aria-label="Scroll to top of page"
           >
-            {/* Cute ambient glow ring */}
+            {/* Ambient glow ring */}
             <span className="absolute inset-0 rounded-2xl bg-brand-mint/20 animate-ping opacity-25 pointer-events-none" />
 
             <motion.div
               animate={isClicked ? { y: -25, opacity: 0 } : { y: 0, opacity: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <ArrowUp className="w-5 h-5 text-brand-mint group-hover:text-white transition-colors" />
+              <GoogleIcon name="arrow_upward" className="text-xl text-brand-mint group-hover:text-white transition-colors" />
             </motion.div>
 
             {/* Cute trailing dot */}

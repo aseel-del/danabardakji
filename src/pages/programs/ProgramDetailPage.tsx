@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ShoppingBag, ArrowLeft, ShieldCheck, Download, Sparkles, Clock, FileText, Stethoscope, MessageCircle, UserCheck } from 'lucide-react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
-import { PROGRAMS_DATA, CONSULTATION_DATA } from '../../data/siteData';
+import { useLanguage } from '../../context/LanguageContext';
+import { GoogleIcon } from '../../components/common/GoogleIcon';
+import { PROGRAMS_DATA } from '../../data/siteData';
 
 interface ProgramDetailPageProps {
   programSlug?: string;
@@ -12,7 +12,7 @@ interface ProgramDetailPageProps {
 export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlug }) => {
   const params = useParams<{ slug: string }>();
   const slug = programSlug || params.slug;
-  const { addToCart } = useCart();
+  const { isRTL, t } = useLanguage();
   const [withFollowUp, setWithFollowUp] = useState<boolean>(false);
 
   const program = PROGRAMS_DATA.find((p) => p.slug === slug);
@@ -25,50 +25,21 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
     ? (program.priceWithFollowUpAed || 550) 
     : (program.priceWithoutFollowUpAed || 350);
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: withFollowUp ? `${program.id}-with-followup` : `${program.id}-without-followup`,
-      title: `${program.arabicTitle || program.title} (${withFollowUp ? 'مع متابعة أسبوعية' : 'بدون متابعة'})`,
-      subtitle: withFollowUp ? 'ملف PDF + متابعة أسبوعية مع دانا' : 'ملف PDF فوري بدون متابعة',
-      price: `${currentPriceAed} درهم إماراتي`,
-      priceNumber: currentPriceAed,
-      currency: 'AED',
-      type: 'program',
-      slug: `/programs/${program.slug}`,
-      badge: withFollowUp ? 'مع متابعة' : 'بدون متابعة',
-      selectedOption: withFollowUp ? 'with-followup' : 'without-followup',
-    });
-  };
-
-  const handleAddBundle = () => {
-    // Add programme with current selection
-    handleAddToCart();
-
-    // Add consultation bundle
-    addToCart({
-      id: CONSULTATION_DATA.id,
-      title: CONSULTATION_DATA.name,
-      subtitle: `Diagnostic Session (Bundle with ${program.arabicTitle || program.title})`,
-      price: `${CONSULTATION_DATA.priceDhs} درهم إماراتي`,
-      priceNumber: CONSULTATION_DATA.priceDhs,
-      currency: 'AED',
-      type: 'consultation',
-      slug: `/packages/${CONSULTATION_DATA.slug}`,
-      badge: 'Bundle Add-on',
-    });
-  };
+  const title = isRTL ? (program.arabicTitle || program.title) : program.title;
+  const subtitle = isRTL ? (program.arabicSubtitle || program.subtitle) : program.subtitle;
+  const currencyText = isRTL ? 'درهم إماراتي' : 'AED';
 
   return (
     <div className="pt-32 pb-24 bg-mesh-subtle min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Breadcrumb / Back Link */}
+        {/* Back Link */}
         <Link
           to="/programs"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-xs font-bold text-brand-navy/60 hover:text-brand-coral transition-colors mb-8"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>الرجوع إلى جميع البرامج / Back to All Programmes</span>
+          <GoogleIcon name={isRTL ? "arrow_forward" : "arrow_back"} className="text-base" />
+          <span>{isRTL ? 'الرجوع إلى جميع البرامج والكتيبات' : 'Back to All Protocols'}</span>
         </Link>
 
         {/* Main Grid */}
@@ -77,24 +48,19 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
           {/* Details Column */}
           <div className="lg:col-span-7 space-y-8">
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-gold/30 text-brand-navy">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-coral/15 text-brand-coral">
                   {program.badge}
                 </span>
-                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-mint/30 text-brand-navy flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>{program.duration}</span>
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-surface-subtle text-brand-navy/70 border border-brand-navy/10">
+                  {program.duration}
                 </span>
               </div>
-
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-1">
-                {program.arabicTitle || program.title}
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-navy tracking-tight mb-2">
+                {title}
               </h1>
-              <div className="text-lg font-bold text-brand-coral mb-3">
-                {program.title}
-              </div>
               <p className="text-sm font-semibold text-brand-navy/70 mb-4">
-                {program.arabicSubtitle || program.subtitle}
+                {subtitle}
               </p>
               <p className="text-sm sm:text-base text-brand-navy/85 leading-relaxed font-normal">
                 {program.longDescription}
@@ -104,8 +70,8 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
             {/* Choose Pricing Option: Without vs With Follow-up */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-brand-mint/40 shadow-soft space-y-4">
               <h3 className="text-base font-bold text-brand-navy flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-brand-coral" />
-                <span>اختر نوع الاشتراك في البرنامج:</span>
+                <GoogleIcon name="tune" className="text-brand-coral text-lg" />
+                <span>{isRTL ? 'اختر نوع الاشتراك في البرنامج:' : 'Select Your Protocol Tier:'}</span>
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -113,24 +79,27 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 <button
                   type="button"
                   onClick={() => setWithFollowUp(false)}
-                  className={`p-4 rounded-2xl border text-right transition-all flex flex-col justify-between ${
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer ${
                     !withFollowUp
-                      ? 'border-brand-coral bg-brand-coral/5 shadow-soft-sm ring-1 ring-brand-coral'
+                      ? 'border-brand-coral bg-brand-coral/5 shadow-soft-sm ring-2 ring-brand-coral/20'
                       : 'border-surface-border bg-surface-subtle hover:bg-white'
-                  }`}
-                  dir="rtl"
+                  } ${isRTL ? 'text-right' : 'text-left'}`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-black text-sm text-brand-navy">٣٥٠ درهم بدون متابعة</span>
-                      {!withFollowUp && <Check className="w-4 h-4 text-brand-coral" />}
+                      <span className="font-extrabold text-sm text-brand-navy">
+                        {isRTL ? '350 درهم بدون متابعة' : '350 AED Without Follow-up'}
+                      </span>
+                      {!withFollowUp && <GoogleIcon name="check_circle" className="text-brand-coral text-base" filled />}
                     </div>
                     <p className="text-xs text-brand-navy/75 leading-relaxed">
-                      ملف البرنامج السريري كامل بصيغة PDF باللغتين العربية والإنجليزية مع إمكانية التحميل الفوري.
+                      {isRTL 
+                        ? 'ملف البرنامج السريري كامل بصيغة PDF باللغتين مع إمكانية التحميل الفوري بعد الدفع.'
+                        : 'Complete clinical protocol guide in PDF format with instant digital download.'}
                     </p>
                   </div>
                   <div className="mt-3 pt-2 border-t border-brand-navy/10 text-xs font-black text-brand-coral">
-                    350 درهم إماراتي (تحميل فوري)
+                    350 {currencyText} ({isRTL ? 'تحميل فوري' : 'Instant Access'})
                   </div>
                 </button>
 
@@ -138,24 +107,27 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 <button
                   type="button"
                   onClick={() => setWithFollowUp(true)}
-                  className={`p-4 rounded-2xl border text-right transition-all flex flex-col justify-between ${
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer ${
                     withFollowUp
-                      ? 'border-brand-mint-dark bg-brand-mint/10 shadow-soft-sm ring-1 ring-brand-mint-dark'
+                      ? 'border-brand-navy bg-brand-navy/5 shadow-soft-sm ring-2 ring-brand-navy/20'
                       : 'border-surface-border bg-surface-subtle hover:bg-white'
-                  }`}
-                  dir="rtl"
+                  } ${isRTL ? 'text-right' : 'text-left'}`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-black text-sm text-brand-navy">٥٥٠ درهم مع متابعة أسبوعية</span>
-                      {withFollowUp && <Check className="w-4 h-4 text-brand-mint-dark" />}
+                      <span className="font-extrabold text-sm text-brand-navy">
+                        {isRTL ? '550 درهم مع متابعة أسبوعية' : '550 AED With Weekly Follow-up'}
+                      </span>
+                      {withFollowUp && <GoogleIcon name="check_circle" className="text-brand-navy text-base" filled />}
                     </div>
                     <p className="text-xs text-brand-navy/75 leading-relaxed">
-                      ملف البرنامج كامل PDF + متابعة وتوجيه أسبوعي مباشر مع أخصائية التغذية دانا بردقجي.
+                      {isRTL 
+                        ? 'ملف البرنامج كامل PDF + متابعة وتوجيه أسبوعي مباشر عبر واتساب مع دانا بردقجي.'
+                        : 'Full PDF Protocol Guide + direct weekly WhatsApp accountability check-ins with Dana.'}
                     </p>
                   </div>
-                  <div className="mt-3 pt-2 border-t border-brand-navy/10 text-xs font-black text-brand-mint-dark">
-                    550 درهم إماراتي (مع المتابعة)
+                  <div className="mt-3 pt-2 border-t border-brand-navy/10 text-xs font-black text-brand-navy">
+                    550 {currencyText} ({isRTL ? 'مع المتابعة' : 'With Check-ins'})
                   </div>
                 </button>
               </div>
@@ -164,145 +136,107 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
             {/* Who is this suitable for */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-4">
               <h3 className="text-lg font-bold text-brand-navy flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-brand-coral" />
-                <span>الفئات المستهدفة لهذا البرنامج</span>
+                <GoogleIcon name="groups" className="text-brand-coral text-lg" />
+                <span>{isRTL ? 'الفئات المستهدفة لهذا البرنامج' : 'Who This Protocol Is Designed For'}</span>
               </h3>
               <div className="space-y-3 pt-2">
                 {program.suitableFor.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-brand-navy/85">
-                    <Check className="w-4 h-4 text-brand-mint-dark flex-shrink-0 mt-0.5" />
+                    <div className="w-5 h-5 rounded-full bg-brand-mint/25 text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <GoogleIcon name="check" className="text-xs font-bold" />
+                    </div>
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* What is Included in Download Guide */}
+            {/* What is Included */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-4">
               <h3 className="text-lg font-bold text-brand-navy flex items-center gap-2">
-                <Download className="w-5 h-5 text-brand-mint-dark" />
-                <span>محتويات الدليل والملف الرقمي</span>
+                <GoogleIcon name="checklist" className="text-brand-coral text-lg" />
+                <span>{isRTL ? 'محتويات الدليل والملف الرقمي' : "What's Included in the Clinical Guide"}</span>
               </h3>
               <div className="space-y-3 pt-2">
-                {program.whatsIncluded.map((feat, i) => (
+                {program.whatsIncluded.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-brand-navy/85">
-                    <Check className="w-4 h-4 text-brand-coral flex-shrink-0 mt-0.5" />
-                    <span>{feat}</span>
+                    <div className="w-5 h-5 rounded-full bg-brand-mint/25 text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <GoogleIcon name="check" className="text-xs font-bold" />
+                    </div>
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Sample Day Meal Schedule */}
-            {program.sampleMealSchedule && program.sampleMealSchedule.length > 0 && (
-              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-surface-border shadow-soft space-y-4">
-                <h3 className="text-lg font-bold text-brand-navy flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-brand-gold" />
-                  <span>نموذج ليوم غذائي مقترح من البرنامج</span>
-                </h3>
-                <div className="space-y-3 pt-2">
-                  {program.sampleMealSchedule.map((schedule, i) => (
-                    <div key={i} className="p-3.5 rounded-2xl bg-surface-subtle border border-surface-border flex items-start gap-3">
-                      <span className="px-2 py-1 rounded-lg bg-brand-navy text-white text-[11px] font-extrabold flex-shrink-0">
-                        {schedule.timing}
-                      </span>
-                      <div>
-                        <h4 className="text-xs font-bold text-brand-navy">{schedule.meal}</h4>
-                        <p className="text-xs text-brand-navy/75 mt-0.5 font-normal">{schedule.focus}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Pricing & Digital Download Sticky Card */}
-          <div className="lg:col-span-5 sticky top-28 space-y-4">
+          {/* Checkout & Sticky Sidebar */}
+          <div className="lg:col-span-5 sticky top-28">
             <div className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-brand-mint/40 shadow-soft-xl space-y-6">
               
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-brand-navy/60 block mb-1">
-                  {withFollowUp ? 'خطة رقمية + متابعة أسبوعية' : 'خطة رقمية كاملة (تحميل فوري)'}
+                  {withFollowUp 
+                    ? (isRTL ? 'البرنامج + متابعة أسبوعية' : 'Protocol Guide + Weekly Follow-up') 
+                    : (isRTL ? 'البرنامج الرقمي (تحميل فوري)' : 'Digital Protocol Guide (Instant Download)')}
                 </span>
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl sm:text-5xl font-black text-brand-navy">{currentPriceAed}</span>
-                  <span className="text-lg font-bold text-brand-navy/70">درهم إماراتي</span>
+                  <span className="text-lg font-bold text-brand-navy/70">{currencyText}</span>
                 </div>
-                <span className="text-xs text-brand-navy/60 block mt-1">
-                  {withFollowUp ? '٥٥٠ درهم مع متابعة أسبوعية' : '٣٥٠ درهم بدون متابعة'}
-                </span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-surface-subtle border border-surface-border text-xs text-brand-navy/75 space-y-2.5">
-                <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-brand-mint-dark" />
-                  <span>{program.downloadFormat}</span>
+              <div className="p-4 rounded-2xl bg-surface-subtle border border-surface-border text-xs text-brand-navy/80 space-y-2.5">
+                <div className="flex items-center gap-2.5">
+                  <GoogleIcon name="description" className="text-brand-mint-dark text-base" />
+                  <span>{isRTL ? 'دليل إرشادي وجدول وجبات متكامل بصيغة PDF' : 'Complete Meal Schedules & Guidelines in PDF'}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Download className="w-4 h-4 text-brand-mint-dark" />
-                  <span>تحميل مباشر بصيغة PDF فور إتمام الطلب</span>
+                <div className="flex items-center gap-2.5">
+                  <GoogleIcon name="download" className="text-brand-mint-dark text-base" />
+                  <span>{isRTL ? 'تحميل مباشر فور إتمام الطلب' : 'Instant Direct Download Post-Payment'}</span>
                 </div>
                 {withFollowUp ? (
-                  <div className="flex items-center gap-2 font-bold text-brand-mint-dark">
-                    <UserCheck className="w-4 h-4" />
-                    <span>يشمل المتابعة الأسبوعية عبر الواتساب مع دانا</span>
+                  <div className="flex items-center gap-2.5 font-bold text-brand-navy">
+                    <GoogleIcon name="support_agent" className="text-brand-mint-dark text-base" />
+                    <span>{isRTL ? 'متابعة أسبوعية مستمرة عبر واتساب مع دانا' : 'Direct weekly WhatsApp accountability with Dana'}</span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-brand-mint-dark" />
-                    <span>دليل سريري موثوق من الأخصائية دانا بردقجي</span>
+                  <div className="flex items-center gap-2.5">
+                    <GoogleIcon name="verified" className="text-brand-mint-dark text-base" />
+                    <span>{isRTL ? 'دليل سريري موثوق من الأخصائية دانا بردقجي' : 'Clinical guide certified by Dana Bardakji'}</span>
                   </div>
                 )}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <a
                   href={program.gumroadUrl || '#'}
-                  className="gumroad-button w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2 cursor-pointer text-center group"
                 >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>الشراء والتحميل الفوري عبر Gumroad ({currentPriceAed} درهم)</span>
+                  <span>
+                    {isRTL 
+                      ? `الحصول على البرنامج (${currentPriceAed} درهم)` 
+                      : `Get Protocol (${currentPriceAed} AED)`}
+                  </span>
+                  <GoogleIcon 
+                    name={isRTL ? "arrow_back" : "arrow_forward"} 
+                    className={`text-base transition-transform ${isRTL ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} 
+                  />
                 </a>
-
-                <button
-                  onClick={handleAddToCart}
-                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-brand-navy bg-surface-subtle hover:bg-brand-mint/20 border border-brand-navy/10 transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>إضافة إلى سلة الموقع ({currentPriceAed} درهم)</span>
-                </button>
               </div>
 
-              {/* Add Consultation Bundle Option */}
-              <div className="pt-4 border-t border-brand-navy/10">
-                <div className="p-4 rounded-2xl bg-brand-gold/15 border border-brand-gold/30 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-brand-navy flex items-center gap-1.5">
-                      <Stethoscope className="w-3.5 h-3.5 text-brand-navy" />
-                      <span>إضافة استشارة سريرية خاصة</span>
-                    </span>
-                    <span className="text-xs font-black text-brand-navy">+{CONSULTATION_DATA.priceDhs} درهم</span>
-                  </div>
-                  <p className="text-[11px] text-brand-navy/75 leading-relaxed">
-                    احصلي على جلسة تشخيصية وتقييم مباشر (45 دقيقة) مع دانا لمراجعة الفحوصات وتطبيق البرنامج.
-                  </p>
-                  <button
-                    onClick={handleAddBundle}
-                    className="w-full py-2 px-3 rounded-xl text-xs font-bold text-brand-navy bg-brand-gold hover:bg-white transition-colors text-center"
-                  >
-                    طلب البرنامج + جلسة الاستشارة ({currentPriceAed + CONSULTATION_DATA.priceDhs} درهم)
-                  </button>
-                </div>
-              </div>
-
-              <div className="text-center pt-1">
+              <div className="text-center pt-2">
                 <a
                   href="https://wa.me/962792222058"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-bold text-brand-navy hover:text-brand-coral transition-colors"
+                  className="text-xs font-bold text-brand-navy hover:text-brand-coral transition-colors inline-flex items-center gap-1.5"
                 >
-                  هل لديك استفسار؟ تواصلي مباشرة عبر الواتساب →
+                  <span>{isRTL ? 'استفسار عبر واتساب' : 'Questions? Chat on WhatsApp'}</span>
+                  <span dir="ltr" className="font-semibold text-brand-navy/70">(+962 7 9222 2058)</span>
                 </a>
               </div>
             </div>

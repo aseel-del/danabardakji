@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag, User, ChevronDown, Sparkles, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
+import { GoogleIcon } from './common/GoogleIcon';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const { totalItems, setIsCartOpen } = useCart();
+  const { language, setLanguage, isRTL, t } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
@@ -27,6 +27,21 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
+
+  // Lock body scroll and suppress floating buttons when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('mobile-menu-active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.classList.remove('mobile-menu-active');
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.classList.remove('mobile-menu-active');
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -63,7 +78,7 @@ export const Navbar: React.FC = () => {
                   : 'text-brand-navy hover:text-brand-coral hover:bg-surface-subtle'
               }`}
             >
-              Home
+              {t('nav.home')}
             </Link>
 
             {/* Packages Dropdown */}
@@ -80,51 +95,71 @@ export const Navbar: React.FC = () => {
                     : 'text-brand-navy hover:text-brand-coral hover:bg-surface-subtle'
                 }`}
               >
-                <span>Packages</span>
-                <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
+                <span>{t('nav.packages')}</span>
+                <GoogleIcon name="expand_more" className="text-base transition-transform group-hover:rotate-180" />
               </Link>
 
               {activeDropdown === 'packages' && (
-                <div className="absolute top-full left-0 w-72 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} w-72 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150`}>
                   <div className="bg-white rounded-2xl shadow-2xl border border-brand-navy/10 p-2 space-y-1">
                     <Link
                       to="/packages"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-bold text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-extrabold text-sm">All Packages Overview</div>
-                      <div className="text-[11px] font-normal text-brand-navy/60">Compare all 4 clinical plans</div>
+                      <div className="font-extrabold text-sm">
+                        {isRTL ? 'جميع باقات الاشتراك' : 'All Packages Overview'}
+                      </div>
+                      <div className="text-[11px] font-normal text-brand-navy/60">
+                        {isRTL ? 'مقارنة باقات المتابعة السريرية' : 'Compare clinical coaching plans'}
+                      </div>
                     </Link>
                     <div className="h-px bg-brand-navy/5 my-1" />
                     <Link
                       to="/packages/standard"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">Standard Package (4 Weeks)</div>
-                      <div className="text-[11px] text-brand-navy/60">500 DHS • 1 Month Reset</div>
+                      <div className="font-bold">
+                        {isRTL ? 'الباقة الأساسية (4 أسابيع)' : 'Standard Package (4 Weeks)'}
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">
+                        {isRTL ? '550 درهم • متابعة دقيقة' : '550 AED • 1-Month Reset'}
+                      </div>
                     </Link>
                     <Link
                       to="/packages/premium"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
                       <div className="font-bold flex items-center justify-between">
-                        <span>Premium Package (8 Weeks)</span>
-                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-brand-gold/30 text-brand-navy font-bold">Popular</span>
+                        <span>{isRTL ? 'الباقة المميزة (9 أسابيع)' : 'Premium Package (9 Weeks)'}</span>
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-brand-gold text-brand-navy font-black">
+                          {isRTL ? 'الأكثر طلباً' : 'Popular'}
+                        </span>
                       </div>
-                      <div className="text-[11px] text-brand-navy/60">1000 DHS • 1 or 2 Subs + Bonus</div>
+                      <div className="text-[11px] text-brand-navy/60">
+                        {isRTL ? '1000 درهم • جلستان زوم' : '1000 AED • 2 Zoom Sessions'}
+                      </div>
                     </Link>
                     <Link
                       to="/packages/extended"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">Extended Package (12 Weeks)</div>
-                      <div className="text-[11px] text-brand-navy/60">1400 DHS • 3 Months Transformation</div>
+                      <div className="font-bold">
+                        {isRTL ? 'الباقة الموسعة (12 أسبوعاً)' : 'Extended Package (12 Weeks)'}
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">
+                        {isRTL ? '1400 درهم • 3 أشهر تحول كامل' : '1400 AED • 3 Months Transformation'}
+                      </div>
                     </Link>
                     <Link
                       to="/packages/consultation"
                       className="block p-2.5 rounded-xl hover:bg-brand-mint/20 text-xs font-medium text-brand-navy transition-colors"
                     >
-                      <div className="font-bold text-brand-navy">1-on-1 Consultation ($50)</div>
-                      <div className="text-[11px] text-brand-navy/60">Diagnostic Session with Dana</div>
+                      <div className="font-bold text-brand-navy">
+                        {isRTL ? 'استشارة فردية (50$)' : '1-on-1 Consultation ($50)'}
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">
+                        {isRTL ? 'جلسة تقييم سريري مع دانا' : 'Diagnostic Session with Dana'}
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -145,66 +180,74 @@ export const Navbar: React.FC = () => {
                     : 'text-brand-navy hover:text-brand-coral hover:bg-surface-subtle'
                 }`}
               >
-                <span>Programmes & Meal Plans</span>
-                <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
+                <span>{t('nav.programs')}</span>
+                <GoogleIcon name="expand_more" className="text-base transition-transform group-hover:rotate-180" />
               </Link>
 
               {activeDropdown === 'programs' && (
-                <div className="absolute top-full left-0 w-80 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} w-80 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150`}>
                   <div className="bg-white rounded-2xl shadow-2xl border border-brand-navy/10 p-2 space-y-1">
                     <Link
                       to="/programs"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-bold text-brand-navy hover:text-brand-coral transition-colors"
                     >
                       <div className="font-extrabold text-sm flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
-                        <span>All Programmes Catalogue</span>
+                        <GoogleIcon name="menu_book" className="text-brand-gold text-base" />
+                        <span>{isRTL ? 'جميع الكتيبات والبرامج' : 'All Programmes Catalogue'}</span>
                       </div>
-                      <div className="text-[11px] font-normal text-brand-navy/60">Instant downloadable clinical guides</div>
+                      <div className="text-[11px] font-normal text-brand-navy/60">
+                        {isRTL ? 'كتيبات جاهزة للتحميل الفوري بصيغة PDF' : 'Instant downloadable clinical guides'}
+                      </div>
                     </Link>
                     <div className="h-px bg-brand-navy/5 my-1" />
-                    <Link
-                      to="/programs/liquid-diet"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
+                    <a
+                      href="https://danabardakji.gumroad.com/l/liquid-diet-protocol"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors group/item"
                     >
-                      <div className="font-bold">Liquid Diet Protocol ($35)</div>
-                      <div className="text-[11px] text-brand-navy/60">Digestive rest & inflammation reduction</div>
-                    </Link>
-                    <Link
-                      to="/programs/gut-reset"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
+                      <div className="font-bold flex items-center justify-between">
+                        <span>{isRTL ? 'برنامج الديتوكس والسوائل (350 درهم)' : 'Liquid Diet Protocol (350 AED)'}</span>
+                        <GoogleIcon name="arrow_outward" className="text-xs text-brand-coral opacity-70 group-hover/item:opacity-100" />
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'إراحة الجهاز الهضمي والديتوكس السريري' : 'Digestive rest & inflammation reduction'}</div>
+                    </a>
+                    <a
+                      href="https://danabardakji.gumroad.com/l/gut-reset-protocol"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors group/item"
                     >
-                      <div className="font-bold">Gut Reset Protocol ($45)</div>
-                      <div className="text-[11px] text-brand-navy/60">Heal dysbiosis & eliminate bloating</div>
-                    </Link>
-                    <Link
-                      to="/programs/fertility-diet"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
+                      <div className="font-bold flex items-center justify-between">
+                        <span>{isRTL ? 'برنامج صحة الجهاز الهضمي والقولون (350 درهم)' : 'Gut Reset Protocol (350 AED)'}</span>
+                        <GoogleIcon name="arrow_outward" className="text-xs text-brand-coral opacity-70 group-hover/item:opacity-100" />
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'علاج اضطرابات القولون وإعادة التوازن' : 'Heal dysbiosis & eliminate bloating'}</div>
+                    </a>
+                    <a
+                      href="https://danabardakji.gumroad.com/l/fertility-diet-protocol"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors group/item"
                     >
-                      <div className="font-bold">Fertility & Hormonal Diet ($45)</div>
-                      <div className="text-[11px] text-brand-navy/60">PCOS, ovulatory & hormonal support</div>
-                    </Link>
-                    <Link
-                      to="/programs/carb-cycle"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
+                      <div className="font-bold flex items-center justify-between">
+                        <span>{isRTL ? 'برنامج التغذية لتعزيز الخصوبة (350 درهم)' : 'Fertility & Hormonal Diet (350 AED)'}</span>
+                        <GoogleIcon name="arrow_outward" className="text-xs text-brand-coral opacity-70 group-hover/item:opacity-100" />
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'دعم تكيس المبايض والتوازن الهرموني' : 'PCOS, ovulatory & hormonal support'}</div>
+                    </a>
+                    <a
+                      href="https://danabardakji.gumroad.com/l/carb-cycling-protocol"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors group/item"
                     >
-                      <div className="font-bold">Carb Cycle Protocol ($40)</div>
-                      <div className="text-[11px] text-brand-navy/60">Metabolic acceleration & fat loss</div>
-                    </Link>
-                    <Link
-                      to="/programs/ramadan"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
-                    >
-                      <div className="font-bold">Ramadan Fasting Plan ($35)</div>
-                      <div className="text-[11px] text-brand-navy/60">Energy & hydration management</div>
-                    </Link>
-                    <Link
-                      to="/programs/exchange-list"
-                      className="block p-2 rounded-xl hover:bg-surface-subtle text-xs text-brand-navy transition-colors"
-                    >
-                      <div className="font-bold">Food Exchange Handbook ($25)</div>
-                      <div className="text-[11px] text-brand-navy/60">Flexible portion building system</div>
-                    </Link>
+                      <div className="font-bold flex items-center justify-between">
+                        <span>{isRTL ? 'برنامج تدوير الكربوهيدرات (350 درهم)' : 'Carb Cycle Protocol (350 AED)'}</span>
+                        <GoogleIcon name="arrow_outward" className="text-xs text-brand-coral opacity-70 group-hover/item:opacity-100" />
+                      </div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'تنشيط الأيض وتسريع حرق الدهون' : 'Metabolic acceleration & fat loss'}</div>
+                    </a>
                   </div>
                 </div>
               )}
@@ -224,86 +267,87 @@ export const Navbar: React.FC = () => {
                     : 'text-brand-navy hover:text-brand-coral hover:bg-surface-subtle'
                 }`}
               >
-                <span>About Dana</span>
-                <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
+                <span>{t('nav.about')}</span>
+                <GoogleIcon name="expand_more" className="text-base transition-transform group-hover:rotate-180" />
               </Link>
 
               {activeDropdown === 'about' && (
-                <div className="absolute top-full left-0 w-64 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className={`absolute top-full ${isRTL ? 'right-0' : 'left-0'} w-64 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150`}>
                   <div className="bg-white rounded-2xl shadow-2xl border border-brand-navy/10 p-2 space-y-1">
                     <Link
                       to="/about/meet"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">Meet Dana</div>
-                      <div className="text-[11px] text-brand-navy/60">B.Sc., UK Higher Diploma & Books</div>
+                      <div className="font-bold">{isRTL ? 'عن دانا ومؤهلاتها' : 'Meet Dana'}</div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'الشهادات والخبرة السريرية' : 'B.Sc., UK Higher Diploma & Books'}</div>
                     </Link>
                     <Link
                       to="/about/who"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">Who She Works With</div>
-                      <div className="text-[11px] text-brand-navy/60">Clinical cases & client profiles</div>
+                      <div className="font-bold">{isRTL ? 'الحالات التي نتابعها' : 'Who She Works With'}</div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'الحالات السريرية والفئات' : 'Clinical cases & client profiles'}</div>
                     </Link>
                     <Link
                       to="/about/more"
                       className="block p-2.5 rounded-xl hover:bg-surface-subtle text-xs font-medium text-brand-navy hover:text-brand-coral transition-colors"
                     >
-                      <div className="font-bold">More Than Nutrition</div>
-                      <div className="text-[11px] text-brand-navy/60">Mindful habits & sustainable living</div>
+                      <div className="font-bold">{isRTL ? 'أكثر من مجرد حمية' : 'More Than Nutrition'}</div>
+                      <div className="text-[11px] text-brand-navy/60">{isRTL ? 'فلسفة نمط الحياة المستدام' : 'Mindful habits & sustainable living'}</div>
                     </Link>
                   </div>
                 </div>
               )}
             </div>
-
-            {/* Account Link */}
-            <Link
-              to="/account/orders"
-              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-xl transition-colors ${
-                location.pathname.startsWith('/account')
-                  ? 'text-brand-coral bg-brand-coral/10'
-                  : 'text-brand-navy hover:text-brand-coral hover:bg-surface-subtle'
-              }`}
-            >
-              <User className="w-4 h-4" />
-              <span>My Account</span>
-            </Link>
           </nav>
 
-          {/* Right Action Icons & Consultation CTA */}
+          {/* Right Action Icons, Language Switcher & Consultation CTA */}
           <div className="flex items-center gap-2 sm:gap-3">
             
-            {/* Cart Button with Live Badge */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-mint/20 text-brand-navy transition-all duration-200"
-              aria-label="Open Cart"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-coral text-white text-[11px] font-extrabold flex items-center justify-center shadow-soft-sm animate-in zoom-in-50 duration-200">
-                  {totalItems}
-                </span>
-              )}
-            </button>
+            {/* Language Switcher Pill Toggle */}
+            <div className="flex items-center bg-surface-subtle p-0.5 rounded-full border border-brand-navy/10">
+              <button
+                type="button"
+                onClick={() => setLanguage('ar')}
+                className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer ${
+                  language === 'ar'
+                    ? 'bg-brand-navy text-white shadow-soft-sm'
+                    : 'text-brand-navy/70 hover:text-brand-navy'
+                }`}
+                title="العربية"
+              >
+                عربي
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer ${
+                  language === 'en'
+                    ? 'bg-brand-navy text-white shadow-soft-sm'
+                    : 'text-brand-navy/70 hover:text-brand-navy'
+                }`}
+                title="English"
+              >
+                EN
+              </button>
+            </div>
 
             {/* Direct Consultation CTA */}
             <Link
               to="/packages/consultation"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>Book $50 Session</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{isRTL ? 'حجز استشارة ($50)' : 'Book $50 Session'}</span>
+              <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-sm" />
             </Link>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-brand-navy hover:bg-brand-mint/20 focus:outline-none transition-colors"
+              className="lg:hidden p-2 rounded-xl text-brand-navy hover:bg-brand-mint/20 focus:outline-none transition-colors cursor-pointer flex items-center justify-center"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <GoogleIcon name="close" className="text-2xl" /> : <GoogleIcon name="menu" className="text-2xl" />}
             </button>
           </div>
         </div>
@@ -315,165 +359,131 @@ export const Navbar: React.FC = () => {
           {/* Backdrop */}
           <div
             onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 top-[68px] bg-brand-navy/40 backdrop-blur-xs z-40 lg:hidden"
+            className="fixed inset-0 top-[60px] sm:top-[68px] bg-brand-navy/60 backdrop-blur-sm z-40 lg:hidden"
             aria-hidden="true"
           />
 
-          <div className="relative z-50 lg:hidden bg-white border-b border-brand-navy/10 px-4 pt-4 pb-6 shadow-2xl max-h-[calc(100vh-80px)] overflow-y-auto">
-            <div className="flex flex-col space-y-3">
-              
+          <div className="fixed top-[60px] sm:top-[68px] left-0 right-0 z-50 lg:hidden bg-white border-b border-brand-navy/10 px-5 pt-3 pb-8 shadow-2xl max-h-[calc(100vh-68px)] overflow-y-auto">
+            {/* Clean Navigation Links */}
+            <div className="flex flex-col divide-y divide-brand-navy/5">
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 text-base font-bold text-brand-navy hover:bg-surface-subtle rounded-xl"
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
               >
-                Home
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="home" className="text-brand-coral text-xl" />
+                  <span>{t('nav.home')}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
               </Link>
 
-              {/* Packages Group */}
-              <div className="p-3 bg-surface-subtle rounded-2xl space-y-1.5">
-                <Link
-                  to="/packages"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs font-black uppercase tracking-wider text-brand-coral mb-1"
-                >
-                  Packages & Consultations
-                </Link>
-                <Link
-                  to="/packages/standard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Standard — 4 Weeks (500 DHS)
-                </Link>
-                <Link
-                  to="/packages/premium"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Premium — 8 Weeks (1000 DHS)
-                </Link>
-                <Link
-                  to="/packages/extended"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Extended — 12 Weeks (1400 DHS)
-                </Link>
-                <Link
-                  to="/packages/consultation"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-bold text-brand-coral"
-                >
-                  One-on-One Consultation ($50 USD)
-                </Link>
-              </div>
+              <Link
+                to="/packages"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="medical_services" className="text-brand-coral text-xl" />
+                  <span>{t('nav.packages')}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </Link>
 
-              {/* Programmes Group */}
-              <div className="p-3 bg-surface-subtle rounded-2xl space-y-1.5">
-                <Link
-                  to="/programs"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs font-black uppercase tracking-wider text-brand-coral mb-1"
-                >
-                  Programmes & Meal Plans
-                </Link>
-                <Link
-                  to="/programs/liquid-diet"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Liquid Diet Protocol ($35)
-                </Link>
-                <Link
-                  to="/programs/gut-reset"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Gut Reset Protocol ($45)
-                </Link>
-                <Link
-                  to="/programs/fertility-diet"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Fertility & Hormonal Diet ($45)
-                </Link>
-                <Link
-                  to="/programs/carb-cycle"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Carb Cycle Protocol ($40)
-                </Link>
-                <Link
-                  to="/programs/ramadan"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Ramadan Fasting Plan ($35)
-                </Link>
-                <Link
-                  to="/programs/exchange-list"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Food Exchange Handbook ($25)
-                </Link>
-              </div>
+              <Link
+                to="/programs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="menu_book" className="text-brand-coral text-xl" />
+                  <span>{t('nav.programs')}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </Link>
 
-              {/* About Group */}
-              <div className="p-3 bg-surface-subtle rounded-2xl space-y-1.5">
-                <Link
-                  to="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs font-black uppercase tracking-wider text-brand-coral mb-1"
-                >
-                  About Dana
-                </Link>
-                <Link
-                  to="/about/meet"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Meet Dana & Background
-                </Link>
-                <Link
-                  to="/about/who"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  Who She Works With
-                </Link>
-                <Link
-                  to="/about/more"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1 text-sm font-medium text-brand-navy"
-                >
-                  More Than Nutrition
-                </Link>
-              </div>
+              <Link
+                to="/about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="person" className="text-brand-coral text-xl" />
+                  <span>{t('nav.about')}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </Link>
 
-              {/* Account & Cart Buttons */}
-              <div className="pt-2 border-t border-brand-navy/10 flex flex-col gap-2.5">
-                <Link
-                  to="/account/orders"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-bold text-brand-navy bg-surface-subtle hover:bg-brand-mint/20 rounded-xl transition-colors"
-                >
-                  <User className="w-4 h-4" />
-                  <span>My Account & Downloads</span>
-                </Link>
+              <a
+                href="/#how-it-works"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="task_alt" className="text-brand-coral text-xl" />
+                  <span>{isRTL ? 'كيف نعمل' : 'How It Works'}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </a>
 
-                <Link
-                  to="/packages/consultation"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-white bg-brand-coral hover:bg-brand-coral-dark rounded-xl shadow-soft"
-                >
-                  <span>Book $50 Consultation</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+              <a
+                href="/#reviews"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="reviews" className="text-brand-coral text-xl" />
+                  <span>{isRTL ? 'آراء المشتركين' : 'Client Reviews'}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </a>
+
+              <a
+                href="/#faqs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="help_outline" className="text-brand-coral text-xl" />
+                  <span>{isRTL ? 'الأسئلة الشائعة' : 'FAQs'}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </a>
+
+              <a
+                href="/#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between py-3.5 px-2 text-base font-bold text-brand-navy hover:text-brand-coral transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <GoogleIcon name="mail" className="text-brand-coral text-xl" />
+                  <span>{isRTL ? 'تواصل معنا' : 'Contact Us'}</span>
+                </span>
+                <GoogleIcon name={isRTL ? "chevron_left" : "chevron_right"} className="text-brand-navy/30 text-lg" />
+              </a>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-6 mt-4 border-t border-brand-navy/10 space-y-3">
+              <Link
+                to="/packages/consultation"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark rounded-2xl shadow-soft transition-all"
+              >
+                <span>{isRTL ? 'حجز استشارة خاصة ($50)' : 'Book $50 Consultation'}</span>
+                <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-sm" />
+              </Link>
+
+              <a
+                href="https://wa.me/962792222058"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-2 text-xs font-semibold text-brand-navy/70 hover:text-brand-coral transition-colors"
+              >
+                <GoogleIcon name="chat" className="text-base text-emerald-600" />
+                <span>{isRTL ? 'واتساب العيادة المباشر:' : 'Direct WhatsApp:'}</span>
+                <span dir="ltr" className="font-bold text-brand-navy">(+962 7 9222 2058)</span>
+              </a>
             </div>
           </div>
         </>

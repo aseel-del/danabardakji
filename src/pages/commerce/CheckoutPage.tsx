@@ -220,7 +220,7 @@ export const CheckoutPage: React.FC = () => {
                       : 'border-brand-navy/10 bg-surface-subtle text-brand-navy/70'
                   }`}
                 >
-                  <span> Apple Pay / Fast Pay</span>
+                  <span>Apple Pay / Fast Pay</span>
                 </button>
               </div>
 

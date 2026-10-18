@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Lock, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { User, Lock, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPage: React.FC = () => {
@@ -77,7 +77,7 @@ export const LoginPage: React.FC = () => {
               onClick={handleDemoLogin}
               className="w-full py-3 px-4 rounded-xl text-xs font-bold text-brand-navy bg-brand-mint/20 hover:bg-brand-mint/30 border border-brand-mint/40 transition-colors flex items-center justify-center gap-2"
             >
-              <Sparkles className="w-4 h-4 text-brand-mint-dark" />
+              <CheckCircle2 className="w-4 h-4 text-brand-mint-dark" />
               <span>Instant 1-Click Client Access</span>
             </button>
           </div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, X, CheckCheck } from 'lucide-react';
+import { GoogleIcon } from './common/GoogleIcon';
+import { useLanguage } from '../context/LanguageContext';
 
 export const WhatsAppButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const { isRTL } = useLanguage();
 
   useEffect(() => {
     if (isOpen) {
@@ -16,14 +18,21 @@ export const WhatsAppButton: React.FC = () => {
     }
   }, [isOpen]);
 
-  const quickPrompts = [
+  const quickPrompts = isRTL ? [
+    'حجز استشارة فردية ($50)',
+    'الاستفسار عن باقات المتابعة الشخصية',
+    'استشارة حول التغذية العلاجية وتكيس المبايض',
+  ] : [
     'Book 1-on-1 Consultation ($50)',
     'Inquire about Personalized Diet Packages',
     'Ask about Therapeutic Nutrition (Diabetes, PCOS, etc.)',
   ];
 
   const handleSendMessage = (textToSend?: string) => {
-    const finalMsg = textToSend || message || 'Hello Dana, I would like to inquire about a clinical nutrition consultation.';
+    const defaultMsg = isRTL 
+      ? 'مرحباً دانا، أود الاستفسار عن استشارة التغذية العلاجية.'
+      : 'Hello Dana, I would like to inquire about a clinical nutrition consultation.';
+    const finalMsg = textToSend || message || defaultMsg;
     const encoded = encodeURIComponent(finalMsg);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=962792222058&text=${encoded}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -40,7 +49,7 @@ export const WhatsAppButton: React.FC = () => {
         />
       )}
 
-      <div className="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end pointer-events-auto">
+      <div className={`fixed bottom-6 ${isRTL ? 'left-4 sm:left-6' : 'right-4 sm:right-6'} z-30 flex flex-col ${isRTL ? 'items-start' : 'items-end'} pointer-events-auto floating-whatsapp-widget`}>
         {/* Interactive In-Page Chat Popup */}
         <AnimatePresence>
           {isOpen && (
@@ -64,20 +73,20 @@ export const WhatsAppButton: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-                      Dana Bardakji
+                      {isRTL ? 'دانا بردقجي' : 'Dana Bardakji'}
                     </h4>
                     <p className="text-[11px] text-brand-mint font-medium">
-                      Clinical Dietitian • Typically replies instantly
+                      {isRTL ? 'أخصائية تغذية علاجية • تجيب عادة خلال دقائق' : 'Clinical Dietitian • Typically replies instantly'}
                     </p>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="relative z-10 p-1.5 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                  className="relative z-10 p-1.5 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                   aria-label="Close chat window"
                 >
-                  <X className="w-5 h-5" />
+                  <GoogleIcon name="close" className="text-xl" />
                 </button>
 
                 {/* Decorative accent top blur */}
@@ -89,31 +98,35 @@ export const WhatsAppButton: React.FC = () => {
                 {/* Timestamp */}
                 <div className="text-center">
                   <span className="text-[10px] uppercase font-semibold text-brand-navy/40 bg-black/5 px-2.5 py-1 rounded-full">
-                    Today
+                    {isRTL ? 'اليوم' : 'Today'}
                   </span>
                 </div>
 
                 {/* Dana's incoming message bubble */}
                 <div className="flex flex-col items-start max-w-[90%]">
-                  <div className="bg-white p-3.5 rounded-2xl rounded-tl-sm shadow-soft-sm border border-brand-navy/5 text-xs text-brand-navy leading-relaxed">
-                    <p className="font-semibold text-brand-navy mb-1">Dana Bardakji</p>
-                    Hello! How can I assist you with your personalized nutrition plan or direct consultation today?
+                  <div className={`bg-white p-3.5 rounded-2xl ${isRTL ? 'rounded-tr-sm' : 'rounded-tl-sm'} shadow-soft-sm border border-brand-navy/5 text-xs text-brand-navy leading-relaxed`}>
+                    <p className="font-semibold text-brand-navy mb-1">{isRTL ? 'دانا بردقجي' : 'Dana Bardakji'}</p>
+                    {isRTL 
+                      ? 'أهلاً بك! كيف يمكنني مساعدتك في خطتك الغذائية أو استشارتك العلاجية اليوم؟'
+                      : 'Hello! How can I assist you with your personalized nutrition plan or direct consultation today?'}
                   </div>
-                  <div className="flex items-center gap-1 text-[10px] text-brand-navy/50 mt-1 ml-1">
-                    <span>Just now</span>
-                    <CheckCheck className="w-3 h-3 text-brand-mint-dark" />
+                  <div className="flex items-center gap-1 text-[10px] text-brand-navy/50 mt-1 mx-1">
+                    <span>{isRTL ? 'الآن' : 'Just now'}</span>
+                    <GoogleIcon name="done_all" className="text-xs text-brand-mint-dark" />
                   </div>
                 </div>
 
                 {/* Quick Suggestion Chips */}
                 <div className="pt-2 space-y-1.5">
-                  <p className="text-[11px] font-semibold text-brand-navy/60">Quick Inquiries:</p>
+                  <p className="text-[11px] font-semibold text-brand-navy/60">
+                    {isRTL ? 'استفسارات سريعة:' : 'Quick Inquiries:'}
+                  </p>
                   <div className="flex flex-col gap-1.5">
                     {quickPrompts.map((prompt, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSendMessage(prompt)}
-                        className="text-left text-[11px] font-medium text-brand-navy bg-white hover:bg-brand-mint/20 border border-brand-navy/10 hover:border-brand-mint/50 p-2 rounded-xl transition-all shadow-soft-sm hover:-translate-y-0.5 active:translate-y-0"
+                        className={`text-xs font-medium text-brand-navy bg-white hover:bg-brand-mint/20 border border-brand-navy/10 hover:border-brand-mint/50 p-2.5 rounded-xl transition-all shadow-soft-sm hover:-translate-y-0.5 active:translate-y-0 cursor-pointer ${isRTL ? 'text-right' : 'text-left'}`}
                       >
                         {prompt}
                       </button>
@@ -134,15 +147,15 @@ export const WhatsAppButton: React.FC = () => {
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message here..."
+                  placeholder={isRTL ? 'اكتب استفسارك هنا...' : 'Type your message here...'}
                   className="flex-1 bg-surface-subtle border border-brand-navy/15 focus:border-brand-mint focus:bg-white rounded-xl px-3 py-2.5 text-xs text-brand-navy placeholder:text-brand-navy/40 focus:outline-none transition-all"
                 />
                 <button
                   type="submit"
-                  className="w-9 h-9 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-soft-sm transition-all hover:scale-105 active:scale-95 flex-shrink-0"
+                  className="w-9 h-9 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-soft-sm transition-all hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer"
                   aria-label="Send WhatsApp message"
                 >
-                  <Send className="w-4 h-4" />
+                  <GoogleIcon name={isRTL ? "send" : "send"} className="text-base" />
                 </button>
               </form>
             </motion.div>
@@ -154,7 +167,7 @@ export const WhatsAppButton: React.FC = () => {
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.1, y: -3 }}
           whileTap={{ scale: 0.92 }}
-          className="relative flex items-center justify-center w-14 h-14 rounded-2xl bg-[#25D366] text-white shadow-soft-lg hover:shadow-xl transition-shadow group z-50"
+          className="relative flex items-center justify-center w-14 h-14 rounded-2xl bg-[#25D366] text-white shadow-soft-lg hover:shadow-xl transition-shadow group z-50 cursor-pointer"
           aria-label={isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat"}
         >
           {/* Ambient pulsing ring when closed */}
@@ -171,7 +184,7 @@ export const WhatsAppButton: React.FC = () => {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <X className="w-6 h-6" />
+                <GoogleIcon name="close" className="text-2xl" />
               </motion.div>
             ) : (
               <motion.div
