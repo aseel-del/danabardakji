@@ -16,10 +16,10 @@ const HIGHLIGHT_WORDS_EN = [
 ];
 
 const HIGHLIGHT_WORDS_AR = [
-  'صحتك وعافيتك',
-  'نمط حياتك',
-  'نشاطك وطاقتك',
-  'توازن جسمك',
+  'لصحتك وعافيتك',
+  'لنمط حياتك',
+  'لنشاطك وطاقتك',
+  'لتوازن جسمك',
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
@@ -54,10 +54,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
               {isRTL ? 'تغذية سريرية وعلاجية متخصصة' : 'Personalized Clinical Nutrition'}
             </span>
             <span className="flex flex-col sm:inline-flex sm:flex-row items-center sm:items-baseline justify-center gap-1.5 sm:gap-3.5">
-              <span className="text-brand-navy">
-                {isRTL ? 'مصممة خصيصاً لـ' : 'Designed for'}
+              <span className="text-brand-navy whitespace-nowrap">
+                {isRTL ? 'مصممة خصيصاً' : 'Designed for'}
               </span>
-              <span className="relative inline-grid grid-cols-1 grid-rows-1 text-brand-coral align-baseline text-center sm:text-left">
+              <span className="relative inline-grid grid-cols-1 grid-rows-1 text-brand-coral align-baseline text-center">
                 {words.map((word, i) => (
                   <motion.span
                     key={word}
