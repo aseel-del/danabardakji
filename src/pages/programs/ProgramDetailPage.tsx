@@ -27,6 +27,9 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
 
   const title = isRTL ? (program.arabicTitle || program.title) : program.title;
   const subtitle = isRTL ? (program.arabicSubtitle || program.subtitle) : program.subtitle;
+  const badge = isRTL ? (program.arabicBadge || program.badge) : program.badge;
+  const suitableFor = isRTL ? (program.arabicSuitableFor || program.suitableFor) : program.suitableFor;
+  const whatsIncluded = isRTL ? (program.arabicWhatsIncluded || program.whatsIncluded) : program.whatsIncluded;
   const currencyText = isRTL ? 'درهم إماراتي' : 'AED';
 
   return (
@@ -50,7 +53,7 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-coral/15 text-brand-coral">
-                  {program.badge}
+                  {badge}
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-surface-subtle text-brand-navy/70 border border-brand-navy/10">
                   {program.duration}
@@ -140,7 +143,7 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 <span>{isRTL ? 'الفئات المستهدفة لهذا البرنامج' : 'Who This Protocol Is Designed For'}</span>
               </h3>
               <div className="space-y-3 pt-2">
-                {program.suitableFor.map((item, i) => (
+                {suitableFor.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-brand-navy/85">
                     <div className="w-5 h-5 rounded-full bg-brand-mint/25 text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
                       <GoogleIcon name="check" className="text-xs font-bold" />
@@ -158,7 +161,7 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                 <span>{isRTL ? 'محتويات الدليل والملف الرقمي' : "What's Included in the Clinical Guide"}</span>
               </h3>
               <div className="space-y-3 pt-2">
-                {program.whatsIncluded.map((item, i) => (
+                {whatsIncluded.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 text-sm text-brand-navy/85">
                     <div className="w-5 h-5 rounded-full bg-brand-mint/25 text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
                       <GoogleIcon name="check" className="text-xs font-bold" />

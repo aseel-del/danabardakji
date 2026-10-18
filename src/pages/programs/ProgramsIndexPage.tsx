@@ -82,6 +82,8 @@ export const ProgramsIndexPage: React.FC = () => {
           {filteredPrograms.map((prog, index) => {
             const title = isRTL ? (prog.arabicTitle || prog.title) : prog.title;
             const subtitle = isRTL ? (prog.arabicSubtitle || prog.subtitle) : prog.subtitle;
+            const badge = isRTL ? (prog.arabicBadge || prog.badge) : prog.badge;
+            const whatsIncluded = isRTL ? (prog.arabicWhatsIncluded || prog.whatsIncluded) : prog.whatsIncluded;
 
             return (
               <motion.div
@@ -95,7 +97,7 @@ export const ProgramsIndexPage: React.FC = () => {
                   {/* Header Badge & Price */}
                   <div className="flex items-center justify-between gap-3 mb-4">
                     <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-brand-gold/20 text-brand-navy border border-brand-gold/30">
-                      {prog.badge}
+                      {badge}
                     </span>
                     <div className={isRTL ? "text-left" : "text-right"}>
                       <div className="flex items-baseline gap-1 text-brand-navy font-black text-lg">
@@ -135,7 +137,7 @@ export const ProgramsIndexPage: React.FC = () => {
 
                   {/* Key Benefits */}
                   <div className="space-y-2 mb-5 pt-2 border-t border-brand-navy/5">
-                    {prog.whatsIncluded.slice(0, 3).map((feat, i) => (
+                    {whatsIncluded.slice(0, 3).map((feat, i) => (
                       <div key={i} className="flex items-start gap-2.5 text-xs text-brand-navy/80">
                         <div className="w-4 h-4 rounded-full bg-brand-mint/20 text-brand-navy flex items-center justify-center flex-shrink-0 mt-0.5">
                           <GoogleIcon name="check" className="text-[10px] font-bold" />
