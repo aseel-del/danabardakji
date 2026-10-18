@@ -217,9 +217,7 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({ programSlu
                   className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2 cursor-pointer text-center group"
                 >
                   <span>
-                    {isRTL 
-                      ? `الحصول على البرنامج (${currentPriceAed} درهم)` 
-                      : `Get Protocol (${currentPriceAed} AED)`}
+                    {isRTL ? 'الحصول على البرنامج' : 'Get Protocol'}
                   </span>
                   <GoogleIcon 
                     name={isRTL ? "arrow_back" : "arrow_forward"} 

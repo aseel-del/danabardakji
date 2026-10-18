@@ -155,7 +155,7 @@ export const ProgramsIndexPage: React.FC = () => {
                     className="w-full py-3.5 px-4 rounded-2xl text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer group/btn"
                   >
                     <span>
-                      {isRTL ? 'الحصول على البرنامج (350 - 550 درهم)' : 'Get Protocol (350 - 550 AED)'}
+                      {isRTL ? 'الحصول على البرنامج' : 'Get Protocol'}
                     </span>
                     <GoogleIcon name="arrow_outward" className="text-sm transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </a>

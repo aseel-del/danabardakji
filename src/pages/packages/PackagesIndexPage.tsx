@@ -192,9 +192,7 @@ export const PackagesIndexPage: React.FC = () => {
                     }`}
                   >
                     <span>
-                      {isRTL 
-                        ? `اختر الباقة (${pkg.priceAed} درهم)` 
-                        : `Choose Package (${pkg.priceAed} AED)`}
+                      {isRTL ? 'اختر الباقة' : 'Choose Package'}
                     </span>
                     <GoogleIcon 
                       name={isRTL ? "arrow_back" : "arrow_forward"} 

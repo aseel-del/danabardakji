@@ -201,7 +201,7 @@ export const ConsultationPage: React.FC = () => {
                   className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all flex items-center justify-center gap-2 cursor-pointer group"
                 >
                   <span>
-                    {isRTL ? 'حجز الجلسة والدفع عبر المتجر ($50)' : 'Book Session via Gumroad ($50 USD)'}
+                    {isRTL ? 'حجز الجلسة والدفع عبر المتجر' : 'Book Session via Gumroad'}
                   </span>
                   <GoogleIcon name="arrow_outward" className="text-base" />
                 </a>

@@ -19,11 +19,11 @@ export const WhatsAppButton: React.FC = () => {
   }, [isOpen]);
 
   const quickPrompts = isRTL ? [
-    'حجز استشارة فردية ($50)',
+    'حجز استشارة فردية',
     'الاستفسار عن باقات المتابعة الشخصية',
     'استشارة حول التغذية العلاجية وتكيس المبايض',
   ] : [
-    'Book 1-on-1 Consultation ($50)',
+    'Book 1-on-1 Consultation',
     'Inquire about Personalized Diet Packages',
     'Ask about Therapeutic Nutrition (Diabetes, PCOS, etc.)',
   ];

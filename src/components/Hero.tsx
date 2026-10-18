@@ -111,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsultation }) => {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-semibold text-brand-navy bg-white hover:bg-brand-gold/15 border border-brand-navy/20 hover:border-brand-navy/40 rounded-2xl shadow-soft-sm transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
             >
               <GoogleIcon name="calendar_today" className="text-base text-brand-coral" />
-              <span>{isRTL ? 'حجز استشارة خاصة ($50)' : 'Book 1-on-1 Consultation ($50)'}</span>
+              <span>{isRTL ? 'حجز استشارة خاصة' : 'Book 1-on-1 Consultation'}</span>
             </Link>
           </motion.div>
 

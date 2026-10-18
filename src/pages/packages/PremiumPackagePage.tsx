@@ -173,7 +173,7 @@ export const PremiumPackagePage: React.FC = () => {
                 className="w-full py-4 px-6 rounded-2xl text-sm font-bold uppercase tracking-wider text-brand-navy bg-brand-gold hover:bg-brand-gold-dark shadow-soft transition-all flex items-center justify-center gap-2 cursor-pointer group"
               >
                 <span>
-                  {isRTL ? `اختر الباقة (${pkg.priceAed} درهم)` : `Choose Package (${pkg.priceAed} AED)`}
+                  {isRTL ? 'اختر الباقة' : 'Choose Package'}
                 </span>
                 <GoogleIcon 
                   name={isRTL ? "arrow_back" : "arrow_forward"} 

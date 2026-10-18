@@ -161,7 +161,7 @@ export const WhoSheWorksWithPage: React.FC = () => {
               to="/packages/consultation"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider bg-brand-coral hover:bg-brand-coral-dark text-white shadow-soft transition-all"
             >
-              <span>{isRTL ? 'حجز جلسة استشارة ($50)' : 'Book 1-on-1 Consultation ($50 USD)'}</span>
+              <span>{isRTL ? 'حجز جلسة استشارة' : 'Book 1-on-1 Consultation'}</span>
               <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-sm" />
             </Link>
             <Link

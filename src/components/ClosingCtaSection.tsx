@@ -69,7 +69,7 @@ export const ClosingCtaSection: React.FC = () => {
             to="/packages/consultation"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>{isRTL ? 'حجز استشارة خاصة ($50)' : 'Book Consultation ($50 USD)'}</span>
+            <span>{isRTL ? 'حجز استشارة خاصة' : 'Book Consultation'}</span>
             <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-base" />
           </Link>
 

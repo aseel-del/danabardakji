@@ -337,7 +337,7 @@ export const Navbar: React.FC = () => {
               to="/packages/consultation"
               className="hidden sm:inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark shadow-soft hover:shadow-coral-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>{isRTL ? 'حجز استشارة ($50)' : 'Book $50 Session'}</span>
+              <span>{isRTL ? 'حجز استشارة' : 'Book Consultation'}</span>
               <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-sm" />
             </Link>
 
@@ -470,7 +470,7 @@ export const Navbar: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center gap-2 py-3.5 px-4 text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark rounded-2xl shadow-soft transition-all"
               >
-                <span>{isRTL ? 'حجز استشارة خاصة ($50)' : 'Book $50 Consultation'}</span>
+                <span>{isRTL ? 'حجز استشارة خاصة' : 'Book Consultation'}</span>
                 <GoogleIcon name={isRTL ? "arrow_back" : "arrow_forward"} className="text-sm" />
               </Link>
 

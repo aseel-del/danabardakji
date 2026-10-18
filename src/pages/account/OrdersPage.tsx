@@ -221,7 +221,7 @@ export const OrdersPage: React.FC = () => {
                 to="/packages/consultation"
                 className="block w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-brand-coral hover:bg-brand-coral-dark text-center shadow-soft transition-colors"
               >
-                Book Session ($50 USD)
+                Book Session
               </Link>
             </div>
           </div>
