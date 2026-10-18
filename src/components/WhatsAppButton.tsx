@@ -49,7 +49,7 @@ export const WhatsAppButton: React.FC = () => {
         />
       )}
 
-      <div className={`fixed bottom-6 ${isRTL ? 'left-4 sm:left-6' : 'right-4 sm:right-6'} z-30 flex flex-col ${isRTL ? 'items-start' : 'items-end'} pointer-events-auto floating-whatsapp-widget`}>
+      <div className="fixed bottom-6 right-4 sm:right-6 z-30 flex flex-col items-end pointer-events-auto floating-whatsapp-widget">
         {/* Interactive In-Page Chat Popup */}
         <AnimatePresence>
           {isOpen && (

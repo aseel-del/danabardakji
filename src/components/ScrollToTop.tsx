@@ -36,7 +36,7 @@ export const ScrollToTop: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 30 }}
           transition={{ type: "spring", stiffness: 350, damping: 25 }}
-          className="fixed bottom-[5.5rem] right-6 z-40 group floating-scroll-to-top"
+          className="fixed bottom-[5.5rem] right-5 sm:right-7 z-40 group floating-scroll-to-top"
         >
           <motion.button
             onClick={scrollToTop}
